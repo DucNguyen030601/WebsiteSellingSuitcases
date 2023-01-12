@@ -1,0 +1,91 @@
+﻿@model WebsiteSellingSuitcases.Models.tKhachHang
+<div class="login">
+    <div class="login_form_container">
+        <div class="account_login_form">
+            @using (Html.BeginForm("CapNhat", "KhachHang", FormMethod.Post))
+            {
+                <input value="@Model.MaKH" name="MaKH" style="display:none"/>
+                <p>
+                    <label>Tên khách hàng  <span>*</span></label>
+                    <input value="@Model.TenKH" name="TenKH" />
+                </p>
+
+
+                <p><label>Giới tính <span>*</span></label></p>
+                <select id="GioiTinh" name="GioiTinh">
+                    <option value="true" @(Model.GioiTinh == true ? "selected" : "")>Nam</option>
+                    <option value="false" @(Model.GioiTinh == false ? "selected" : "")>Nữ</option>
+                </select>
+                <br /><br />
+
+                <p><label>Thị trấn / Thành phố<span>*</span></label></p>
+                <select id="ThanhPho" name="ThanhPho">
+                    <option value="Nam Định" @(Model.ThanhPho == "Nam Định" ? "selected" : "")>Nam Định</option>
+                    <option value="Hà Nội" @(Model.ThanhPho == "Hà Nội" ? "selected" : "")>Hà Nội</option>
+                </select>
+                <br /><br />
+
+                <p><label>Huyện / Quận<span>*</span></label></p>
+                <div id="Huyen">
+                    @if (Model.ThanhPho == "Hà Nội")
+                    {
+                        <select name="Huyen" class="nice-select list" tabindex="0">
+                            <option value="Hoàng Mai" @(Model.Huyen == "Hoàng Mai" ? "selected" : "") class="option">Hoàng Mai</option>
+                            <option value="Long Biên" @(Model.Huyen == "Long Biên" ? "selected" : "") class="option">Long Biên</option>
+                            <option value="Thanh Xuân" @(Model.Huyen == "Thanh Xuân" ? "selected" : "") class="option">Thanh Xuân</option>
+                            <option value="Bắc Từ Liêm" @(Model.Huyen == "Bắc Từ Liêm" ? "selected" : "") class="option">Bắc Từ Liêm</option>
+                            <option value="Ba Đình" @(Model.Huyen == "Ba Đình" ? "selected" : "") class="option">Ba Đình</option>
+                            <option value="Cầu Giấy" @(Model.Huyen == "Cầu Giấy" ? "selected" : "") class="option">Cầu Giấy</option>
+                            <option value="Đống Đa" @(Model.Huyen == "Đống Đa" ? "selected" : "") class="option">Đống Đa</option>
+                            <option value="Hai Bà Trưng" @(Model.Huyen == "Hai Bà Trưng" ? "selected" : "") class="option">Hai Bà Trưng</option>
+                            <option value="Hoàn Kiếm" @(Model.Huyen == "Hoàn Kiếm" ? "selected" : "") class="option">Hoàn Kiếm</option>
+                            <option value="Hà Đông" @(Model.Huyen == "Hà Đông" ? "selected" : "") class="option">Hà Đông</option>
+                            <option value="Tây Hồ" @(Model.Huyen == "Tây Hồ" ? "selected" : "") class="option">Tây Hồ</option>
+                            <option value="Nam Từ Liêm" @(Model.Huyen == "Nam Từ Liêm" ? "selected" : "") class="option">Nam Từ Liêm</option>
+                        </select>
+                    }
+                    @if (Model.ThanhPho == "Nam Định")
+                    {
+                        <select name="Huyen" class="nice-select list" tabindex="0">
+                            <option value="Hải Hậu" @(Model.Huyen == "Hải Hậu" ? "selected" : "") class="option">Hải Hậu</option>
+                            <option value="Nam Ninh" @(Model.Huyen == "Nam Ninh" ? "selected" : "") class="option">Nam Ninh</option>
+                            <option value="Nghĩa Hưng" @(Model.Huyen == "Nghĩa Hưng" ? "selected" : "") class="option">Nghĩa Hưng</option>
+                            <option value="Vụ Bản" @(Model.Huyen == "Vụ Bản" ? "selected" : "") class="option">Vụ Bản</option>
+                            <option value="Xuân Thuỷ" @(Model.Huyen == "Xuân Thuỷ" ? "selected" : "") class="option">Xuân Thuỷ</option>
+                            <option value="Ý Yên" @(Model.Huyen == "Ý Yên" ? "selected" : "") class="option">Ý Yên</option>
+                            <option value="Hải Hậu" @(Model.Huyen == "Hải Hậu" ? "selected" : "") class="option">Hải Hậu</option>
+                            <option value="Mỹ Lộc" @(Model.Huyen == "Mỹ Lộc" ? "selected" : "") class="option">Mỹ Lộc</option>
+                            <option value="Xuân Trường" @(Model.Huyen == "Xuân Trường" ? "selected" : "") class="option">Xuân Trường</option>
+                        </select>
+                    }
+                </div>
+                <br /><br />
+
+                <p>
+                    <label>Địa chỉ đường phố <span>*</span></label>
+                    <input type="text" required="" name="DiaChi" value="@Model.DiaChi">
+                </p>
+
+                <p>
+                    <label>Email <span>*</span></label>
+                    <input type="email" required="" name="Email" value="@Model.Email">
+                </p>
+                <p>
+                    <label>Số điện thoại <span>*</span></label>
+                    <input type="text" required="" name="DienThoai" value="@Model.DienThoai">
+                </p>
+                <p>
+                    <label>Tên người dùng <span>*</span></label>
+                    <input type="text" required="" name="TenNguoiDung" value="@Model.TenNguoiDung" readonly>
+                </p>
+                <p>
+                    <label>Mật khẩu <span>*</span></label>
+                    <input type="password" required="" name="MatKhau" value="@Model.MatKhau">
+                </p>
+                <div class="login_submit">
+                    <button type="submit">Cập Nhật</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>

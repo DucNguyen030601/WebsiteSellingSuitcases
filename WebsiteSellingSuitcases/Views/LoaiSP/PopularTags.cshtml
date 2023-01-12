@@ -1,0 +1,7 @@
+﻿@model List<WebsiteSellingSuitcases.Models.tDinhKem>
+@{
+    foreach (var item in Model)
+    {
+        <a href="@Url.Action("Index","SanPham",new {Tag = item.TieuDe})">@item.TieuDe</a>
+    }
+}

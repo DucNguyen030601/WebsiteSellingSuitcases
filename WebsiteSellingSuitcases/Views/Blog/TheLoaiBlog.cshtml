@@ -1,0 +1,13 @@
+﻿@model List<WebsiteSellingSuitcases.Models.tLoaiBlog>
+<div class="blog_widget widget_categoie  mb-30">
+    <h3>Thể loại</h3>
+    <ul>
+        @{ 
+            foreach (var item in Model)
+            {
+                <li><a href="@Url.Action("Index","Blog",new {TheLoai=item.Ten})">@item.Ten</a></li>
+            }
+        }
+        
+    </ul>
+</div>

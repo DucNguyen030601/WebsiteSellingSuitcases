@@ -1,0 +1,41 @@
+﻿@model List<WebsiteSellingSuitcases.Models.GioHang>
+
+@{
+    if (ViewBag.TongSL != 0)
+    {
+        foreach (var item in Model)
+        {
+            <div class="cart_item">
+                <div class="cart_img">
+                    <a ><img src="~/Images/@item.sHinhAnh" alt=""></a>
+                </div>
+                <div class="cart_info">
+                    <a href="@Url.Action("Details", "SanPham", new {MaSP = item.sMaSP.Trim()})">@item.sTenSP</a>
+                    <span class="cart_price">@String.Format("{0:0,0 VNĐ}", item.dThanhTien)</span>
+                    <span class="quantity">Số lượng: @item.iSoLuong</span>
+                </div>
+                <div class="cart_remove">
+ 
+                    @using (Html.BeginForm("XoaGioHang", "GioHang", new { sMaSP = item.sMaSP, strUrl = ViewBag.Url }))
+                    {
+                        <button type="submit"  style="color: #00bba6; font-size: 20px;background-color:white;border:0px "><i class="fa fa-times-circle" ></i></button>
+                    }
+                </div>
+            </div>
+        }
+
+        <div class="shipping_price">
+            <span> Phí ship </span>
+            <span>  @String.Format("{0:0,0 VNĐ}", ViewBag.PhiShip)  </span>
+        </div>
+        <div class="total_price">
+            <span> Tổng tiền </span>
+            <span class="prices">  @String.Format("{0:0,0 VNĐ}", ViewBag.TongTien)   </span>
+        </div>
+        <div class="cart_button">
+            <a href="/GioHang/ThuTucThanhToan">Thanh toán</a>
+        </div>
+    }
+}
+
+

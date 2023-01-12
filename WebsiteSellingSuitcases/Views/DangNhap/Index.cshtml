@@ -1,0 +1,158 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutSP.cshtml";
+}
+@model WebsiteSellingSuitcases.Models.tKhachHang
+<!--breadcrumbs area start-->
+<div class="breadcrumbs_area">
+    <div class="row">
+        <div class="col-12">
+            <div class="breadcrumb_content">
+                <ul>
+                    <li><a href="/Home/Index">Trang Chủ</a></li>
+                    <li><i class="fa fa-angle-right"></i></li>
+                    <li>Đăng Nhập</li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--breadcrumbs area end-->
+<!-- customer login start -->
+<div class="customer_login">
+    <div class="row">
+        <!--login area start-->
+        <div class="col-lg-6 col-md-6">
+            <div class="account_form">
+                <h2>Đăng nhập</h2>
+                @{
+                    if (@TempData["DangNhapLoi"] != null)
+                    {
+                        <!-- Error Alert -->
+                        <div class="alert alert-danger alert-dismissible fade show">
+                            <strong>Đăng nhập không thành công!</strong> @TempData["DangKyLoi"]
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    }
+
+                }
+                @using (Html.BeginForm("DangNhap", "DangNhap", FormMethod.Post))
+                {
+                    <p>
+                        <label>Tên người dùng <span>*</span></label>
+                        <input type="text" name="TenNguoiDung" value="@TempData["TenNguoiDung"]" required="">
+                    </p>
+
+                    <p>
+                        <label>Mật khẩu <span>*</span></label>
+                        <input type="password" name="MatKhau" value="@TempData["MatKhau"] " required="">
+                    </p>
+                    <div class="login_submit">
+                        <button type="submit">Đăng Nhập</button>
+                        <label for="remember">
+                            <input id="remember" type="checkbox">
+                            Ghi nhớ đăng nhập
+                        </label>
+                        <a href="#">Lost your password?</a>
+                    </div>
+
+                }
+            </div>
+        </div>
+        <!--login area start-->
+        <!--register area start-->
+        <div class="col-lg-6 col-md-6">
+            <div class="account_form register">
+                <h2>Đăng ký</h2>
+                @{
+                    if (@TempData["DangKyThanhCong"] != null)
+                    {
+
+                        <!-- Success Alert -->
+                        <div class="alert alert-success alert-dismissible fade show">
+                            <strong>Đăng ký thành công!</strong> @TempData["DangKyThanhCong"]
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    }
+                    if (@TempData["DangKyLoi"] != null)
+                    {
+                        <!-- Error Alert -->
+                        <div class="alert alert-danger alert-dismissible fade show">
+                            <strong>Đăng ký không thành công!</strong> @TempData["DangKyLoi"]
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    }
+
+
+                }
+                @using (Html.BeginForm("DangKy", "DangNhap", FormMethod.Post))
+                {
+                    <p>
+                        <label>Tên khách hàng  <span>*</span></label>
+                        <input type="text" required="" name="TenKH">
+                    </p>
+                    <p><label>Giới tính <span>*</span></label></p>
+                    <select id="GioiTinh" name="GioiTinh">
+                        <option value="true">Nam</option>
+                        <option value="false">Nữ</option>
+                    </select>
+                    <br /><br />
+
+                    <p><label>Thị trấn / Thành phố<span>*</span></label></p>
+                    <select id="ThanhPho" name="ThanhPho">
+                        <option  value="Nam Định" title="ND">Nam Định</option>
+                        <option value="Hà Nội" title="HN">Hà Nội</option>
+                    </select>
+                    <br /><br />
+
+                    <p><label>Huyện / Quận<span>*</span></label></p>
+                    <div id="Huyen">
+                        <select name="Huyen" class="nice-select list" tabindex="0">
+                            <option value="Hải Hậu" class="option">Hải Hậu</option>
+                            <option value="Nam Ninh" class="option">Nam Ninh</option>
+                            <option value="Nghĩa Hưng" class="option">Nghĩa Hưng</option>
+                            <option value="Vụ Bản" class="option">Vụ Bản</option>
+                            <option value="Xuân Thuỷ" class="option">Xuân Thuỷ</option>
+                            <option value="Ý Yên" class="option">Ý Yên</option>
+                            <option value="Hải Hậu" class="option">Hải Hậu</option>
+                            <option value="Mỹ Lộc" class="option">Mỹ Lộc</option>
+                            <option value="Xuân Trường" class="option">Xuân Trường</option>
+
+                        </select>
+                    </div>
+                    <br /><br />
+
+                    <p>
+                        <label>Địa chỉ đường phố <span>*</span></label>
+                        <input type="text" required="" name="DiaChi">
+                    </p>
+
+                    <p>
+                        <label>Email <span>*</span></label>
+                        <input type="email" required="" name="Email">
+                    </p>
+                    <p>
+                        <label>Số điện thoại <span>*</span></label>
+                        <input type="text" required="" name="DienThoai">
+                    </p>
+                    <p>
+                        <label>Tên người dùng <span>*</span></label>
+                        <input type="text" required="" name="TenNguoiDung">
+                    </p>
+                    <p>
+                        <label>Mật khẩu <span>*</span></label>
+                        <input type="password" required="" name="MatKhau">
+                    </p>
+                    <div class="login_submit">
+                        <button type="submit">Đăng Ký</button>
+                    </div>
+                }
+
+            </div>
+        </div>
+        <!--register area end-->
+    </div>
+</div>
+<!-- customer login end -->

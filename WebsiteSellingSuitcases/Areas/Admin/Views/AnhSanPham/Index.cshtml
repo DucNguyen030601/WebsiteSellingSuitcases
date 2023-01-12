@@ -1,0 +1,40 @@
+﻿@model IEnumerable<WebsiteSellingSuitcases.Models.tAnhSP>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create",new {@MaSP =ViewBag.MaSP })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.tDanhMucSP.TenSP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tDanhMucSP.Anh)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.tDanhMucSP.TenSP)
+    </td>
+    <td>
+        <img src="~/Images/@item.TenFileAnh" width="50px" height="50px" />
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new {MaSP = item.MaSP.Trim() , Anh=item.TenFileAnh.Trim()  }) |
+        @Html.ActionLink("Details", "Details", new { MaSP = item.MaSP.Trim(),  Anh = item.TenFileAnh.Trim() }) |
+        @Html.ActionLink("Delete", "Delete", new { MaSP = item.MaSP.Trim(),  Anh = item.TenFileAnh.Trim() })
+    </td>
+</tr>
+}
+
+</table>

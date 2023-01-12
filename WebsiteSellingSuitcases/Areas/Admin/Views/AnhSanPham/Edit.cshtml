@@ -1,0 +1,67 @@
+﻿@model WebsiteSellingSuitcases.Models.tAnhSP
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm("Edit", "AnhSanPham", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <h4>tAnhSP</h4>
+    <hr />
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+    <input name="Anh" value="@Model.TenFileAnh" hidden/>
+    <div class="form-group">
+        @Html.LabelFor(model => model.MaSP, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.MaSP, new { htmlAttributes = new { @class = "form-control", @readonly = "" } })
+            @Html.ValidationMessageFor(model => model.MaSP, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.ViTri, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ViTri, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ViTri, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.TenFileAnh, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.TenFileAnh, new { htmlAttributes = new { @class = "form-control", @readonly = "" } })
+            @Html.ValidationMessageFor(model => model.TenFileAnh, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    @*-------image-----*@
+    <div class="form-group">
+        <input type="file" accept=".jpg" name="file" onchange="ValidateFile(event)" value="@Model.TenFileAnh" class=" control-label col-md-2" style="width: 110px;margin-left: 175px;">
+        <img id="imgInput" src="~/Images/@Model.TenFileAnh" style="width:300px;height:400px;object-fit:contain" />
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+<script>
+    function ValidateFile(event) {
+        var fileName = $('input[type="file"]').val();
+        var idxSlash = fileName.lastIndexOf("\\") + 1;
+        var extFile = fileName.substr(idxSlash, fileName.length);
+        $('#TenFileAnh').val(extFile);
+        //show img
+        var src = URL.createObjectURL(event.target.files[0]);
+        $('#imgInput').attr("src", src);
+    }
+</script>

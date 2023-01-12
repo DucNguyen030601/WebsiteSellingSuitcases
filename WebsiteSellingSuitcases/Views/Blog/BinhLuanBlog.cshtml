@@ -1,0 +1,25 @@
+﻿@model List<WebsiteSellingSuitcases.Models.Review>
+<div class="blog_widget widget_recent  mb-30">
+    <h3>Bình Luận</h3>
+    <div class="widget_recent_inner" style="overflow:auto;height:350px">
+        @{
+            foreach (var item in Model)
+            {
+                <div class="single_posts">
+                    <div class="posts_thumb">
+                        <a href="@Url.Action("DocThem","Blog",new {Blog_ID = item.Blog_ID})"><img src="~/assets/img/blog/blog12.jpg" alt=""></a>
+                    </div>
+                    <div class="post_content">
+                        
+                        <a class="tweet_author" href="@Url.Action("DocThem","Blog",new {Blog_ID = item.Blog_ID})"><strong>@item.HoTen</strong> đã bình luận bài viết<span style="color:darkblue">@item.tBlog.TieuDe.Substring(0, 25) ... </span> </a>
+
+                        
+                        <a href="@Url.Action("DocThem","Blog",new {Blog_ID = item.Blog_ID})">@(((DateTime)item.ThoiGian).ToString("dd/MM/yyyy"))</a>
+                    </div>
+                </div>
+            }
+        }
+        
+
+    </div>
+</div>

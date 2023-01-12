@@ -1,0 +1,74 @@
+﻿@model PagedList<WebsiteSellingSuitcases.Models.tBlog>
+@using PagedList.Mvc
+@using PagedList
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Tiêu đề
+        </th>
+        <th>
+            Tóm tắt
+        </th>
+        <th>
+            Ảnh
+        </th>
+        <th>
+            Ngày
+        </th>
+        <th>
+            Lượt xem
+        </th>
+        <th>
+            Thể loại
+        </th>
+        <th>
+            Người viết
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TieuDe)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TomTat)
+            </td>
+            <td>
+                <img src="~/Images/Blogs/@item.AnhBlog" width="150px" height="100px" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ngay)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LuotXem)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tLoaiBlog.Ten)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tNhanVien.TenNV)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Blog_ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Blog_ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Blog_ID })
+            </td>
+        </tr>
+    }
+
+</table>
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))

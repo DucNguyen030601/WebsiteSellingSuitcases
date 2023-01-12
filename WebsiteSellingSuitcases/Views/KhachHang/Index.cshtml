@@ -1,0 +1,90 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutSP.cshtml";
+}
+
+<!--breadcrumbs area start-->
+<div class="breadcrumbs_area">
+    <div class="row">
+        <div class="col-12">
+            <div class="breadcrumb_content">
+                <ul>
+                    <li><a href="/Home">Trang chủ</a></li>
+                    <li><i class="fa fa-angle-right"></i></li>
+                    <li>Tài khoản của tôi</li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--breadcrumbs area end-->
+<!-- Start Maincontent  -->
+<section class="main_content_area">
+    <div class="account_dashboard">
+        <div class="row">
+            <div class="col-sm-12 col-md-3 col-lg-3">
+                <!-- Nav tabs -->
+                <div class="dashboard_tab_button">
+                    <ul role="tablist" class="nav flex-column dashboard-list">
+                        <li><a href="/KhachHang?ThongTin=KhachHang"  class="@Url.Content("nav-link " + ((ViewData["KhachHang"] ?? " ").ToString().Split(' '))[1])">Thông tin khách hàng</a></li>
+                        <li> <a href="/KhachHang?ThongTin=DonDat"  class="@Url.Content("nav-link "+ ((ViewData["DonDat"]??" ").ToString().Split(' '))[1])">Đơn hàng đã đặt</a></li>
+                        <li><a href="/KhachHang?ThongTin=DonMua"  class="@Url.Content("nav-link "+ ((ViewData["DonMua"]??" ").ToString().Split(' '))[1])">Đơn hàng đã mua</a></li>
+                        <li><a href="/KhachHang?ThongTin=YeuThich"  class="@Url.Content("nav-link "+ ((ViewData["YeuThich"]??" ").ToString().Split(' '))[1])">Danh sách yêu thích</a></li>
+
+                        <li><a href="/DangNhap" class="nav-link">Đăng xuất</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-9 col-lg-9">
+                <!-- Tab panes -->
+                <div class="tab-content dashboard_content">
+
+                    <div class="@Url.Content("tab-pane fade "+ViewData["KhachHang"])" id="account-details">
+                        <h3>Thông tin khách hàng </h3>
+                        @{
+                            if (@TempData["CapNhatThanhCong"] != null)
+                            {
+
+                                <!-- Success Alert -->
+                                <div class="alert alert-success alert-dismissible fade show">
+                                    <strong>@TempData["CapNhatThanhCong"]</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                </div>
+                            }
+                            if (@TempData["CapNhatLoi"] != null)
+                            {
+                                <!-- Error Alert -->
+                                <div class="alert alert-danger alert-dismissible fade show">
+                                    <strong>@TempData["CapNhatLoi"]</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                </div>
+                            }
+                        }
+                        @Html.Action("CapNhat","KhachHang")
+                    </div>
+
+                    <div class="@Url.Content("tab-pane fade "+ViewData["DonDat"])" id="orders">
+                        <h3>Đơn hàng đã đặt</h3>
+                       @Html.Action("DonDat", "KhachHang")
+                    </div>
+
+                    <div class="@Url.Content("tab-pane fade "+ViewData["DonMua"])" id="downloads">
+                        <h3>Đơn hàng đã mua</h3>
+                        @Html.Action("DonMua", "KhachHang")
+                    </div>
+
+                    <div class="@Url.Content("tab-pane fade "+ViewData["YeuThich"])" id="wishlist">
+                        <h3>Danh sách yêu thích</h3>
+                        @Html.Action("YeuThich","KhachHang")
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Maincontent  -->

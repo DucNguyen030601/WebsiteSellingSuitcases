@@ -1,0 +1,127 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutSP.cshtml";
+}
+
+@using PagedList;
+@using PagedList.Mvc;
+@model PagedList<WebsiteSellingSuitcases.Models.tBlog>
+@using System.Threading;
+@using System.Globalization;
+<!--breadcrumbs area start-->
+<div class="breadcrumbs_area">
+    <div class="row">
+        <div class="col-12">
+            <div class="breadcrumb_content">
+                <ul>
+                    <li><a href="/Home">Trang Chủ</a></li>
+                    <li><i class="fa fa-angle-right"></i></li>
+                    <li title="navBlog">blog</li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--breadcrumbs area end-->
+<!--blog area start-->
+<div class="blog_area">
+    <div class="row">
+        @{
+            foreach (var item in Model)
+            {
+                <div class="col-lg-4 col-md-6">
+                    <div class="single_blog">
+                        <div class="blog_thumb">
+                            <a href="@Url.Action("DocThem","Blog",new {Blog_ID = item.Blog_ID })"><img src="~/Images/Blogs/@item.AnhBlog" width="100px" height="250px" alt=""></a>
+                        </div>
+                        <div class="blog_content">
+                            <div class="blog_post">
+                                <ul>
+                                    <li>
+                                        <a href="#">@item.tLoaiBlog.Ten</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <h3><a href="blog-details.html">@item.TieuDe</a></h3>
+                            <p>@item.TomTat</p>
+                            <div class="post_footer">
+                                <div class="post_meta">
+                                    <ul>
+                                        @{
+                                            Thread.CurrentThread.CurrentCulture = new CultureInfo("vi-VN");
+                                            string strToday = ((DateTime)item.Ngay).ToString("dddd dd/MM/yyy HH':'mm':'ss");
+                                        }
+                                        <li>@strToday</li>
+                                        <li>@item.Reviews.Count() bình luận</li>
+                                    </ul>
+                                </div>
+                                <div class="Read_more">
+                                    <a href="@Url.Action("DocThem","Blog",new {Blog_ID = item.Blog_ID })">Đọc thêm  <i class="fa fa-angle-double-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+
+
+    </div>
+</div>
+<!--blog area end-->
+<!--pagination style start-->
+<div class="blog_pagination">
+    <div class="row">
+        <div class="col-12">
+            <div class="page_number">
+                <span>Trang: </span>
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--pagination style end-->
+<!--brand logo strat-->
+<div class="brand_logo brand_about">
+    <div class="block_title">
+        <h3>Brands</h3>
+    </div>
+    <div class="row">
+        <div class="brand_active owl-carousel">
+            <div class="col-lg-2">
+                <div class="single_brand">
+                    <a href="#"><img src="assets/img/brand/brand1.jpg" alt=""></a>
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="single_brand">
+                    <a href="#"><img src="assets/img/brand/brand2.jpg" alt=""></a>
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="single_brand">
+                    <a href="#"><img src="assets/img/brand/brand3.jpg" alt=""></a>
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="single_brand">
+                    <a href="#"><img src="assets/img/brand/brand4.jpg" alt=""></a>
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="single_brand">
+                    <a href="#"><img src="assets/img/brand/brand5.jpg" alt=""></a>
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="single_brand">
+                    <a href="#"><img src="assets/img/brand/brand6.jpg" alt=""></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--brand logo end-->

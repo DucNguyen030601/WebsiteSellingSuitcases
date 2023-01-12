@@ -1,0 +1,196 @@
+﻿
+@{
+    ViewBag.Title = "DocThem";
+    Layout = "~/Views/Shared/_LayoutSP.cshtml";
+}
+@model WebsiteSellingSuitcases.Models.tBlog
+@using System.Threading;
+@using System.Globalization;
+<!--breadcrumbs area start-->
+<div class="breadcrumbs_area">
+    <div class="row">
+        <div class="col-12">
+            <div class="breadcrumb_content">
+                <ul>
+                    <li><a href="/Home">Trang chủ</a></li>
+                    <li><i class="fa fa-angle-right"></i></li>
+                    <li title="navBlog"><a href="/Blog" >Blog</a></li>
+                    <li><i class="fa fa-angle-right"></i></li>
+                    <li>@Model.TieuDe</li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--breadcrumbs area end-->
+<!--blog area start-->
+<div class="main_blog_area blog_details">
+    <div class="row">
+        <div class="col-lg-9 col-md-12">
+            <div class="blog_details_left">
+                <div class="blog_gallery">
+                    <div class="blog_header">
+                        <span>
+                            <a href="#">@Model.tLoaiBlog.Ten</a>
+                        </span>
+                        <h2><a href="#">@Model.TieuDe</a></h2>
+                        <div class="blog__post">
+                            <ul>
+                                <li class="post_author">Bài của : @Model.tNhanVien.TenNV</li>
+                                @{
+                                    Thread.CurrentThread.CurrentCulture = new CultureInfo("vi-VN");
+                                    string strToday = ((DateTime)Model.Ngay).ToString("dddd dd/MM/yyy HH':'mm':'ss");
+
+                                }
+                                <li class="post_date">@strToday</li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                    @Html.Raw(Model.ChiTiet)
+                    <div class="blog_entry_meta">
+                        <ul>
+                            <li><a href="#comment">@ViewBag.Comments bình luận</a></li>
+                            <li> / Tags: <a href="#">@Model.tLoaiBlog.Ten</a></li>
+                        </ul>
+                    </div>
+                    <div class="wishlist-share">
+                        <h4>Share on:</h4>
+                        <ul>
+                            <li><a href="#"><i class="fa fa-rss"></i></a></li>
+                            <li><a href="#"><i class="fa fa-vimeo"></i></a></li>
+                            <li><a href="#"><i class="fa fa-tumblr"></i></a></li>
+                            <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!--services img area-->
+                <div class="srrvices_img_area">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="single_img_services mb-20">
+                                <div class="services_thumb">
+                                    <img src="~/assets/img/blog/blog6.jpg" alt="">
+                                </div>
+                                <div class="services_content">
+                                    <h3>Ý TƯỞNG LUẬN</h3>
+                                    <div class="tweetlink favorite">
+                                        <a href="#"> March 10, 2018 </a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 ">
+                            <div class="single_img_services mb-20">
+                                <div class="services_thumb">
+                                    <img src="~/assets/img/blog/blog9.jpg" alt="">
+                                </div>
+                                <div class="services_content">
+                                    <h3>THIẾT KẾ BÌA</h3>
+                                    <div class="tweetlink favorite">
+                                        <a href="#"> March 10, 2018 </a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="single_img_services mb-20">
+                                <div class="services_thumb">
+                                    <img src="~/assets/img/blog/blog10.jpg" alt="">
+                                </div>
+                                <div class="services_content">
+                                    <h3>PHÁT TRIỂN CỐT LÕI</h3>
+                                    <div class="tweetlink favorite">
+                                        <a href="#"> March 10, 2018 </a>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--services img end-->
+                <div class="blog__page_content" style="text-align:center" id="comment">
+                    <h6 style="color:darkorange"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i> Tất Cả Bình Luận <i class="fa fa-chevron-circle-right" aria-hidden="true"></i></h6>
+                </div>
+                @{
+                    foreach (var item in Model.Reviews)
+                    {
+                        <div class="product_info_inner">
+
+                            <div class="product_ratting mb-10">
+                                <ul>
+                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                </ul>
+                                @{
+                                    Thread.CurrentThread.CurrentCulture = new CultureInfo("vi-VN");
+                                    string date = ((DateTime)item.ThoiGian).ToString("dddd dd/MM/yyy HH':'mm':'ss");
+
+                                }
+                                <p>@date</p>
+                            </div>
+                            <div class="product_demo">
+                                <strong>@item.HoTen</strong>
+                                <p>@item.NoiDung</p>
+                            </div>
+                        </div>
+                    }
+                }
+                <div class="product_review_form">
+                    @using (Html.BeginForm("SubmitComment", "Blog", new { Blog_ID = Model.Blog_ID }, FormMethod.Post))
+                    {
+                        <h2>ĐỂ LẠI MỘT CÂU TRẢ LỜI</h2>
+                        <p>Địa chỉ email của bạn sẽ không được công bố. Các trường bắt buộc được đánh dấu </p>
+                        <div class="row">
+                            <div class="col-12">
+                                <label for="review_comment">Bình luận</label>
+                                <textarea name="comment" id="review_comment" required=""></textarea>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <label for="author">Họ Tên</label>
+                                <input id="author" name="author" type="text" required="">
+
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <label for="email">Email </label>
+                                <input id="email" name="email" type="text" required="">
+                            </div>
+                        </div>
+                        <button type="submit">Đăng bình luận</button>
+                    }
+                </div>
+
+
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-8 offset-md-2 offset-lg-0">
+            <div class="blog_details_right">
+                <div class="blog_widget search_widget mb-30">
+                    <h3>Tìm kiếm</h3>
+                    @using (Html.BeginForm("Index", "Blog", FormMethod.Get))
+                    {
+                        @Html.TextBox("TimKiem", null, htmlAttributes: new { @placeholder = "Tìm kiếm.." })
+                        <button type="submit"><i class="fa fa-search"></i></button>
+                    }
+                </div>
+       
+                @Html.Action("TheLoaiBlog","Blog")
+                @Html.Action("BaiVietGanDayBlog", "Blog")
+                @Html.Action("PhoBienBlog", "Blog")
+                @Html.Action("BinhLuanBlog", "Blog")
+                
+            </div>
+        </div>
+    </div>
+</div>
+<!--blog area end-->

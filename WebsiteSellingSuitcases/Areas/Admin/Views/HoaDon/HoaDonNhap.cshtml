@@ -1,0 +1,50 @@
+﻿@model PagedList<WebsiteSellingSuitcases.Models.tHoaDon>
+@using PagedList.Mvc
+@using PagedList
+@{
+    ViewBag.Title = "Hoá Đơn Nhập";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Số Hoá Đơn</th>
+            <th>Lập Hoá Đơn</th>
+            <th>Ngày Nhập</th>
+            <th>Tổng Tiền</th>
+            <th>Chi Tiết Đơn Hàng</th>
+            <th>Xoá hoá đơn</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.SoHD</td>
+                    <td><a style="text-decoration:underline" data-toggle="modal-ajax" data-target="#modalDetailsAdmin" data-url="@Url.Action("ChiTietNhanVien", "NhanVien", new {MaNV = item.MaNV })" title="Quick view">@item.tNhanVien.TenNV</a></td>
+                    <td>@item.NgayBan_NgayNhap</td>
+                    <td>@String.Format("{0:0,0 VNĐ}", @item.TongTien)</td>
+                    <td><a style="text-decoration:underline" data-toggle="modal-ajax" data-target="#modalDetailsBill" data-url="@Url.Action("ChiTietHoaDon", "HoaDon", new {SoHD = item.SoHD })" title="Quick view">Xem chi tiết</a></td>
+
+                    <td>
+                        @using (Html.BeginForm("XoaHoaDon", "DuyetHoaDon", new { SoHD = item.SoHD, strUrl = Request.Url.ToString() }))
+                        {
+                            <button style="background-color:white;border:0px"><i class="fas fa-trash-alt" style="color:blue;font-size:20px"></i></button>
+                        }
+                    </td>
+
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+@Html.PagedListPager(Model, page => Url.Action("HoaDonNhap", new { page = page }))
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script>
+    $(document).ready(function () {
+        if ("@TempData["thongtin"]" != "") alert(@Html.Raw(Json.Encode(TempData["thongtin"])))
+    })
+</script>

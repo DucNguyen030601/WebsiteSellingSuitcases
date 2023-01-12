@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
+<h2>Doanh Thu</h2>
+@using (Html.BeginForm("Index", "DoanhThu", FormMethod.Get))
+{
+<strong> Tháng:</strong>
+<input type="number" id="quantity" name="thang" min="1" max="12" value="@ViewBag.Thang">
+<strong>Năm:</strong>
+<input type="number" id="quantity" name="nam" min="2022" max="@DateTime.Now.Year" value="@ViewBag.Nam">
+<button type="submit" style="background-color:white;border:0px"><i class='fas fa-check-double' style="color:darkblue"></i></button>
+}
+<h4> - Hoá Đơn Bán: @String.Format("{0:0,0 VNĐ}", ViewBag.HDB??0)</h4>
+<h4> - Hoá Đơn Nhập: @String.Format("{0:0,0 VNĐ}", ViewBag.HDN??0)</h4>
+<h4 style="color:red">=>Số Tiền Thu Được: @String.Format("{0:0,0 VNĐ}", ViewBag.HDB - ViewBag.HDN)</h4>
+
+
+

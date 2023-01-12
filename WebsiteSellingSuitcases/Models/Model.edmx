@@ -1,0 +1,1414 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="WebsiteSellingSuitcases.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Reviews">
+          <Key>
+            <PropertyRef Name="Review_ID" />
+          </Key>
+          <Property Name="Review_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaSP" Type="char" MaxLength="25" />
+          <Property Name="NoiDung" Type="nvarchar(max)" />
+          <Property Name="HoTen" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="ThoiGian" Type="datetime" />
+          <Property Name="Blog_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="tADMIN">
+          <Key>
+            <PropertyRef Name="Admin" />
+          </Key>
+          <Property Name="Admin" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tAnhSP">
+          <Key>
+            <PropertyRef Name="MaSP" />
+            <PropertyRef Name="TenFileAnh" />
+          </Key>
+          <Property Name="MaSP" Type="char" MaxLength="25" Nullable="false" />
+          <Property Name="TenFileAnh" Type="char" MaxLength="100" Nullable="false" />
+          <Property Name="ViTri" Type="smallint" />
+        </EntityType>
+        <EntityType Name="tBlog">
+          <Key>
+            <PropertyRef Name="Blog_ID" />
+          </Key>
+          <Property Name="Blog_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TieuDe" Type="nvarchar(max)" />
+          <Property Name="TomTat" Type="nvarchar(max)" />
+          <Property Name="ChiTiet" Type="nvarchar(max)" />
+          <Property Name="MaLoaiBlog" Type="int" />
+          <Property Name="AnhBlog" Type="nvarchar" MaxLength="100" />
+          <Property Name="Ngay" Type="datetime" />
+          <Property Name="MaNV" Type="int" />
+          <Property Name="LuotXem" Type="int" />
+        </EntityType>
+        <EntityType Name="tChatLieu">
+          <Key>
+            <PropertyRef Name="MaChatLieu" />
+          </Key>
+          <Property Name="MaChatLieu" Type="char" MaxLength="25" Nullable="false" />
+          <Property Name="ChatLieu" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="tChiTietHoaDon">
+          <Key>
+            <PropertyRef Name="SoHD" />
+            <PropertyRef Name="MaSP" />
+          </Key>
+          <Property Name="SoHD" Type="int" Nullable="false" />
+          <Property Name="MaSP" Type="char" MaxLength="25" Nullable="false" />
+          <Property Name="SoLuong" Type="int" />
+          <Property Name="GiaBan" Type="money" />
+          <Property Name="ThanhTien" Type="money" />
+          <Property Name="ChietKhau" Type="float" />
+        </EntityType>
+        <EntityType Name="tDanhMucSP">
+          <Key>
+            <PropertyRef Name="MaSP" />
+          </Key>
+          <Property Name="MaSP" Type="char" MaxLength="25" Nullable="false" />
+          <Property Name="TenSP" Type="nvarchar" MaxLength="150" />
+          <Property Name="MaChatLieu" Type="char" MaxLength="25" />
+          <Property Name="NganLapTop" Type="nvarchar" MaxLength="55" />
+          <Property Name="MauSac" Type="nvarchar" MaxLength="55" />
+          <Property Name="MaKichThuoc" Type="char" MaxLength="25" />
+          <Property Name="CanNang" Type="float" />
+          <Property Name="DoNoi" Type="float" />
+          <Property Name="MaHangSX" Type="char" MaxLength="25" />
+          <Property Name="MaNuocSX" Type="char" MaxLength="25" />
+          <Property Name="Website" Type="char" MaxLength="155" />
+          <Property Name="ThoiGianBaoHanh" Type="float" />
+          <Property Name="GioiThieuSP" Type="nvarchar" MaxLength="255" />
+          <Property Name="GiaBan" Type="float" />
+          <Property Name="ChietKhau" Type="float" />
+          <Property Name="MaLoai" Type="char" MaxLength="25" />
+          <Property Name="MaDT" Type="char" MaxLength="25" />
+          <Property Name="Anh" Type="char" MaxLength="100" />
+          <Property Name="SoLuong" Type="int" />
+          <Property Name="NgayTao" Type="datetime" />
+          <Property Name="GiaNhap" Type="float" />
+          <Property Name="LuotXem" Type="int" />
+        </EntityType>
+        <EntityType Name="tDinhKem">
+          <Key>
+            <PropertyRef Name="MaDK" />
+          </Key>
+          <Property Name="MaDK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TieuDe" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tDinhKemSP">
+          <Key>
+            <PropertyRef Name="MaDK" />
+            <PropertyRef Name="MaSP" />
+          </Key>
+          <Property Name="MaDK" Type="int" Nullable="false" />
+          <Property Name="MaSP" Type="char" MaxLength="25" Nullable="false" />
+          <Property Name="Dummy" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="tHangSX">
+          <Key>
+            <PropertyRef Name="MaHangSX" />
+          </Key>
+          <Property Name="MaHangSX" Type="char" MaxLength="25" Nullable="false" />
+          <Property Name="HangSX" Type="nvarchar" MaxLength="100" />
+          <Property Name="MaNuocThuongHieu" Type="char" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="tHoaDon">
+          <Key>
+            <PropertyRef Name="SoHD" />
+          </Key>
+          <Property Name="SoHD" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NgayBan/NgayNhap" Type="datetime" />
+          <Property Name="MaKH" Type="int" />
+          <Property Name="NgayThanhToan" Type="datetime" />
+          <Property Name="TongTien" Type="money" />
+          <Property Name="MaNV" Type="int" />
+          <Property Name="Loai" Type="bit" />
+          <Property Name="NoiDung" Type="nvarchar" MaxLength="100" />
+          <Property Name="Ship" Type="bit" />
+          <Property Name="XacNhan" Type="int" />
+        </EntityType>
+        <EntityType Name="tKhachHang">
+          <Key>
+            <PropertyRef Name="MaKH" />
+          </Key>
+          <Property Name="MaKH" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenNguoiDung" Type="varchar" MaxLength="20" />
+          <Property Name="MatKhau" Type="varchar" MaxLength="30" />
+          <Property Name="TenKH" Type="nvarchar" MaxLength="50" />
+          <Property Name="DiaChi" Type="nvarchar" MaxLength="150" />
+          <Property Name="DienThoai" Type="varchar" MaxLength="15" />
+          <Property Name="Email" Type="varchar" MaxLength="30" />
+          <Property Name="GioiTinh" Type="bit" />
+          <Property Name="Huyen" Type="nvarchar" MaxLength="50" />
+          <Property Name="ThanhPho" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tKichThuoc">
+          <Key>
+            <PropertyRef Name="MaKichThuoc" />
+          </Key>
+          <Property Name="MaKichThuoc" Type="char" MaxLength="25" Nullable="false" />
+          <Property Name="KichThuoc" Type="nchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="tLienHe">
+          <Key>
+            <PropertyRef Name="Contact_ID" />
+          </Key>
+          <Property Name="Contact_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HoTen" Type="nvarchar" MaxLength="50" />
+          <Property Name="TieuDe" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="DienThoai" Type="nvarchar" MaxLength="50" />
+          <Property Name="TinNhan" Type="nvarchar(max)" />
+          <Property Name="Ngay" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tLoaiBlog">
+          <Key>
+            <PropertyRef Name="MaLoaiBlog" />
+          </Key>
+          <Property Name="MaLoaiBlog" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ten" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tLoaiDT">
+          <Key>
+            <PropertyRef Name="MaDT" />
+          </Key>
+          <Property Name="MaDT" Type="char" MaxLength="25" Nullable="false" />
+          <Property Name="TenLoai" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="tLoaiSP">
+          <Key>
+            <PropertyRef Name="MaLoai" />
+          </Key>
+          <Property Name="MaLoai" Type="char" MaxLength="25" Nullable="false" />
+          <Property Name="Loai" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="tNhanVien">
+          <Key>
+            <PropertyRef Name="MaNV" />
+          </Key>
+          <Property Name="MaNV" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenNguoiDung" Type="varchar" MaxLength="20" />
+          <Property Name="MatKhau" Type="varchar" MaxLength="30" />
+          <Property Name="TenNV" Type="nvarchar" MaxLength="50" />
+          <Property Name="DiaChi" Type="nvarchar" MaxLength="150" />
+          <Property Name="DienThoai" Type="varchar" MaxLength="15" />
+          <Property Name="Email" Type="varchar" MaxLength="30" />
+          <Property Name="GioiTinh" Type="bit" />
+        </EntityType>
+        <EntityType Name="tQuocGia">
+          <Key>
+            <PropertyRef Name="MaNuoc" />
+          </Key>
+          <Property Name="MaNuoc" Type="char" MaxLength="25" Nullable="false" />
+          <Property Name="TenNuoc" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="tYeuThich">
+          <Key>
+            <PropertyRef Name="MaSP" />
+            <PropertyRef Name="MaKH" />
+          </Key>
+          <Property Name="MaSP" Type="char" MaxLength="25" Nullable="false" />
+          <Property Name="MaKH" Type="int" Nullable="false" />
+          <Property Name="Ngay" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_Reviews_tBog">
+          <End Role="tBlog" Type="Self.tBlog" Multiplicity="0..1" />
+          <End Role="Reviews" Type="Self.Reviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tBlog">
+              <PropertyRef Name="Blog_ID" />
+            </Principal>
+            <Dependent Role="Reviews">
+              <PropertyRef Name="Blog_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reviews_tDanhMucSP">
+          <End Role="tDanhMucSP" Type="Self.tDanhMucSP" Multiplicity="0..1" />
+          <End Role="Reviews" Type="Self.Reviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tDanhMucSP">
+              <PropertyRef Name="MaSP" />
+            </Principal>
+            <Dependent Role="Reviews">
+              <PropertyRef Name="MaSP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tAnhSP_tDanhMucSP">
+          <End Role="tDanhMucSP" Type="Self.tDanhMucSP" Multiplicity="1" />
+          <End Role="tAnhSP" Type="Self.tAnhSP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tDanhMucSP">
+              <PropertyRef Name="MaSP" />
+            </Principal>
+            <Dependent Role="tAnhSP">
+              <PropertyRef Name="MaSP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tBog_tLoaiBlog">
+          <End Role="tLoaiBlog" Type="Self.tLoaiBlog" Multiplicity="0..1" />
+          <End Role="tBlog" Type="Self.tBlog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tLoaiBlog">
+              <PropertyRef Name="MaLoaiBlog" />
+            </Principal>
+            <Dependent Role="tBlog">
+              <PropertyRef Name="MaLoaiBlog" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tBog_tNhanVien">
+          <End Role="tNhanVien" Type="Self.tNhanVien" Multiplicity="0..1" />
+          <End Role="tBlog" Type="Self.tBlog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tNhanVien">
+              <PropertyRef Name="MaNV" />
+            </Principal>
+            <Dependent Role="tBlog">
+              <PropertyRef Name="MaNV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tChiTietHoaDon_tDanhMucSP">
+          <End Role="tDanhMucSP" Type="Self.tDanhMucSP" Multiplicity="1" />
+          <End Role="tChiTietHoaDon" Type="Self.tChiTietHoaDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tDanhMucSP">
+              <PropertyRef Name="MaSP" />
+            </Principal>
+            <Dependent Role="tChiTietHoaDon">
+              <PropertyRef Name="MaSP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tChiTietHoaDon_tHoaDonBan">
+          <End Role="tHoaDon" Type="Self.tHoaDon" Multiplicity="1" />
+          <End Role="tChiTietHoaDon" Type="Self.tChiTietHoaDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tHoaDon">
+              <PropertyRef Name="SoHD" />
+            </Principal>
+            <Dependent Role="tChiTietHoaDon">
+              <PropertyRef Name="SoHD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tDanhMucSP_tChatLieu">
+          <End Role="tChatLieu" Type="Self.tChatLieu" Multiplicity="0..1" />
+          <End Role="tDanhMucSP" Type="Self.tDanhMucSP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tChatLieu">
+              <PropertyRef Name="MaChatLieu" />
+            </Principal>
+            <Dependent Role="tDanhMucSP">
+              <PropertyRef Name="MaChatLieu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tDanhMucSP_tHangSX">
+          <End Role="tHangSX" Type="Self.tHangSX" Multiplicity="0..1" />
+          <End Role="tDanhMucSP" Type="Self.tDanhMucSP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tHangSX">
+              <PropertyRef Name="MaHangSX" />
+            </Principal>
+            <Dependent Role="tDanhMucSP">
+              <PropertyRef Name="MaHangSX" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tDanhMucSP_tKichThuoc">
+          <End Role="tKichThuoc" Type="Self.tKichThuoc" Multiplicity="0..1" />
+          <End Role="tDanhMucSP" Type="Self.tDanhMucSP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tKichThuoc">
+              <PropertyRef Name="MaKichThuoc" />
+            </Principal>
+            <Dependent Role="tDanhMucSP">
+              <PropertyRef Name="MaKichThuoc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tDanhMucSP_tLoaiDT">
+          <End Role="tLoaiDT" Type="Self.tLoaiDT" Multiplicity="0..1" />
+          <End Role="tDanhMucSP" Type="Self.tDanhMucSP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tLoaiDT">
+              <PropertyRef Name="MaDT" />
+            </Principal>
+            <Dependent Role="tDanhMucSP">
+              <PropertyRef Name="MaDT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tDanhMucSP_tLoaiSP">
+          <End Role="tLoaiSP" Type="Self.tLoaiSP" Multiplicity="0..1" />
+          <End Role="tDanhMucSP" Type="Self.tDanhMucSP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tLoaiSP">
+              <PropertyRef Name="MaLoai" />
+            </Principal>
+            <Dependent Role="tDanhMucSP">
+              <PropertyRef Name="MaLoai" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tDanhMucSP_tQuocGia">
+          <End Role="tQuocGia" Type="Self.tQuocGia" Multiplicity="0..1" />
+          <End Role="tDanhMucSP" Type="Self.tDanhMucSP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tQuocGia">
+              <PropertyRef Name="MaNuoc" />
+            </Principal>
+            <Dependent Role="tDanhMucSP">
+              <PropertyRef Name="MaNuocSX" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tDinhKemSanPham_tDanhMucSP">
+          <End Role="tDanhMucSP" Type="Self.tDanhMucSP" Multiplicity="1" />
+          <End Role="tDinhKemSP" Type="Self.tDinhKemSP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tDanhMucSP">
+              <PropertyRef Name="MaSP" />
+            </Principal>
+            <Dependent Role="tDinhKemSP">
+              <PropertyRef Name="MaSP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tDinhKemSanPham_tDinhKem">
+          <End Role="tDinhKem" Type="Self.tDinhKem" Multiplicity="1" />
+          <End Role="tDinhKemSP" Type="Self.tDinhKemSP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tDinhKem">
+              <PropertyRef Name="MaDK" />
+            </Principal>
+            <Dependent Role="tDinhKemSP">
+              <PropertyRef Name="MaDK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tHangSX_tQuocGia">
+          <End Role="tQuocGia" Type="Self.tQuocGia" Multiplicity="0..1" />
+          <End Role="tHangSX" Type="Self.tHangSX" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tQuocGia">
+              <PropertyRef Name="MaNuoc" />
+            </Principal>
+            <Dependent Role="tHangSX">
+              <PropertyRef Name="MaNuocThuongHieu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tHoaDonBan_tKhachHang">
+          <End Role="tKhachHang" Type="Self.tKhachHang" Multiplicity="0..1" />
+          <End Role="tHoaDon" Type="Self.tHoaDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tKhachHang">
+              <PropertyRef Name="MaKH" />
+            </Principal>
+            <Dependent Role="tHoaDon">
+              <PropertyRef Name="MaKH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tHoaDonBan_tNhanVien">
+          <End Role="tNhanVien" Type="Self.tNhanVien" Multiplicity="0..1" />
+          <End Role="tHoaDon" Type="Self.tHoaDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tNhanVien">
+              <PropertyRef Name="MaNV" />
+            </Principal>
+            <Dependent Role="tHoaDon">
+              <PropertyRef Name="MaNV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tYeuThich_tDanhMucSP">
+          <End Role="tDanhMucSP" Type="Self.tDanhMucSP" Multiplicity="1" />
+          <End Role="tYeuThich" Type="Self.tYeuThich" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tDanhMucSP">
+              <PropertyRef Name="MaSP" />
+            </Principal>
+            <Dependent Role="tYeuThich">
+              <PropertyRef Name="MaSP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tYeuThich_tKhachHang">
+          <End Role="tKhachHang" Type="Self.tKhachHang" Multiplicity="1" />
+          <End Role="tYeuThich" Type="Self.tYeuThich" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tKhachHang">
+              <PropertyRef Name="MaKH" />
+            </Principal>
+            <Dependent Role="tYeuThich">
+              <PropertyRef Name="MaKH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WebsiteSellingSuitcasesStoreContainer">
+          <EntitySet Name="Reviews" EntityType="Self.Reviews" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tADMIN" EntityType="Self.tADMIN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tAnhSP" EntityType="Self.tAnhSP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tBlog" EntityType="Self.tBlog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tChatLieu" EntityType="Self.tChatLieu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tChiTietHoaDon" EntityType="Self.tChiTietHoaDon" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tDanhMucSP" EntityType="Self.tDanhMucSP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tDinhKem" EntityType="Self.tDinhKem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tDinhKemSP" EntityType="Self.tDinhKemSP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tHangSX" EntityType="Self.tHangSX" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tHoaDon" EntityType="Self.tHoaDon" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tKhachHang" EntityType="Self.tKhachHang" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tKichThuoc" EntityType="Self.tKichThuoc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tLienHe" EntityType="Self.tLienHe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tLoaiBlog" EntityType="Self.tLoaiBlog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tLoaiDT" EntityType="Self.tLoaiDT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tLoaiSP" EntityType="Self.tLoaiSP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tNhanVien" EntityType="Self.tNhanVien" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tQuocGia" EntityType="Self.tQuocGia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tYeuThich" EntityType="Self.tYeuThich" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Reviews_tBog" Association="Self.FK_Reviews_tBog">
+            <End Role="tBlog" EntitySet="tBlog" />
+            <End Role="Reviews" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reviews_tDanhMucSP" Association="Self.FK_Reviews_tDanhMucSP">
+            <End Role="tDanhMucSP" EntitySet="tDanhMucSP" />
+            <End Role="Reviews" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tAnhSP_tDanhMucSP" Association="Self.FK_tAnhSP_tDanhMucSP">
+            <End Role="tDanhMucSP" EntitySet="tDanhMucSP" />
+            <End Role="tAnhSP" EntitySet="tAnhSP" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tBog_tLoaiBlog" Association="Self.FK_tBog_tLoaiBlog">
+            <End Role="tLoaiBlog" EntitySet="tLoaiBlog" />
+            <End Role="tBlog" EntitySet="tBlog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tBog_tNhanVien" Association="Self.FK_tBog_tNhanVien">
+            <End Role="tNhanVien" EntitySet="tNhanVien" />
+            <End Role="tBlog" EntitySet="tBlog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tChiTietHoaDon_tDanhMucSP" Association="Self.FK_tChiTietHoaDon_tDanhMucSP">
+            <End Role="tDanhMucSP" EntitySet="tDanhMucSP" />
+            <End Role="tChiTietHoaDon" EntitySet="tChiTietHoaDon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tChiTietHoaDon_tHoaDonBan" Association="Self.FK_tChiTietHoaDon_tHoaDonBan">
+            <End Role="tHoaDon" EntitySet="tHoaDon" />
+            <End Role="tChiTietHoaDon" EntitySet="tChiTietHoaDon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tDanhMucSP_tChatLieu" Association="Self.FK_tDanhMucSP_tChatLieu">
+            <End Role="tChatLieu" EntitySet="tChatLieu" />
+            <End Role="tDanhMucSP" EntitySet="tDanhMucSP" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tDanhMucSP_tHangSX" Association="Self.FK_tDanhMucSP_tHangSX">
+            <End Role="tHangSX" EntitySet="tHangSX" />
+            <End Role="tDanhMucSP" EntitySet="tDanhMucSP" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tDanhMucSP_tKichThuoc" Association="Self.FK_tDanhMucSP_tKichThuoc">
+            <End Role="tKichThuoc" EntitySet="tKichThuoc" />
+            <End Role="tDanhMucSP" EntitySet="tDanhMucSP" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tDanhMucSP_tLoaiDT" Association="Self.FK_tDanhMucSP_tLoaiDT">
+            <End Role="tLoaiDT" EntitySet="tLoaiDT" />
+            <End Role="tDanhMucSP" EntitySet="tDanhMucSP" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tDanhMucSP_tLoaiSP" Association="Self.FK_tDanhMucSP_tLoaiSP">
+            <End Role="tLoaiSP" EntitySet="tLoaiSP" />
+            <End Role="tDanhMucSP" EntitySet="tDanhMucSP" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tDanhMucSP_tQuocGia" Association="Self.FK_tDanhMucSP_tQuocGia">
+            <End Role="tQuocGia" EntitySet="tQuocGia" />
+            <End Role="tDanhMucSP" EntitySet="tDanhMucSP" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tDinhKemSanPham_tDanhMucSP" Association="Self.FK_tDinhKemSanPham_tDanhMucSP">
+            <End Role="tDanhMucSP" EntitySet="tDanhMucSP" />
+            <End Role="tDinhKemSP" EntitySet="tDinhKemSP" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tDinhKemSanPham_tDinhKem" Association="Self.FK_tDinhKemSanPham_tDinhKem">
+            <End Role="tDinhKem" EntitySet="tDinhKem" />
+            <End Role="tDinhKemSP" EntitySet="tDinhKemSP" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tHangSX_tQuocGia" Association="Self.FK_tHangSX_tQuocGia">
+            <End Role="tQuocGia" EntitySet="tQuocGia" />
+            <End Role="tHangSX" EntitySet="tHangSX" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tHoaDonBan_tKhachHang" Association="Self.FK_tHoaDonBan_tKhachHang">
+            <End Role="tKhachHang" EntitySet="tKhachHang" />
+            <End Role="tHoaDon" EntitySet="tHoaDon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tHoaDonBan_tNhanVien" Association="Self.FK_tHoaDonBan_tNhanVien">
+            <End Role="tNhanVien" EntitySet="tNhanVien" />
+            <End Role="tHoaDon" EntitySet="tHoaDon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tYeuThich_tDanhMucSP" Association="Self.FK_tYeuThich_tDanhMucSP">
+            <End Role="tDanhMucSP" EntitySet="tDanhMucSP" />
+            <End Role="tYeuThich" EntitySet="tYeuThich" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tYeuThich_tKhachHang" Association="Self.FK_tYeuThich_tKhachHang">
+            <End Role="tKhachHang" EntitySet="tKhachHang" />
+            <End Role="tYeuThich" EntitySet="tYeuThich" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WebsiteSellingSuitcases" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="WebsiteSellingSuitcasesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Reviews" EntityType="WebsiteSellingSuitcases.Review" />
+          <EntitySet Name="tADMINs" EntityType="WebsiteSellingSuitcases.tADMIN" />
+          <EntitySet Name="tAnhSPs" EntityType="WebsiteSellingSuitcases.tAnhSP" />
+          <EntitySet Name="tChatLieux" EntityType="WebsiteSellingSuitcases.tChatLieu" />
+          <EntitySet Name="tChiTietHoaDons" EntityType="WebsiteSellingSuitcases.tChiTietHoaDon" />
+          <EntitySet Name="tDanhMucSPs" EntityType="WebsiteSellingSuitcases.tDanhMucSP" />
+          <EntitySet Name="tDinhKems" EntityType="WebsiteSellingSuitcases.tDinhKem" />
+          <EntitySet Name="tDinhKemSPs" EntityType="WebsiteSellingSuitcases.tDinhKemSP" />
+          <EntitySet Name="tHangSXes" EntityType="WebsiteSellingSuitcases.tHangSX" />
+          <EntitySet Name="tKhachHangs" EntityType="WebsiteSellingSuitcases.tKhachHang" />
+          <EntitySet Name="tKichThuocs" EntityType="WebsiteSellingSuitcases.tKichThuoc" />
+          <EntitySet Name="tLoaiBlogs" EntityType="WebsiteSellingSuitcases.tLoaiBlog" />
+          <EntitySet Name="tLoaiDTs" EntityType="WebsiteSellingSuitcases.tLoaiDT" />
+          <EntitySet Name="tLoaiSPs" EntityType="WebsiteSellingSuitcases.tLoaiSP" />
+          <EntitySet Name="tNhanViens" EntityType="WebsiteSellingSuitcases.tNhanVien" />
+          <EntitySet Name="tQuocGias" EntityType="WebsiteSellingSuitcases.tQuocGia" />
+          <EntitySet Name="tYeuThiches" EntityType="WebsiteSellingSuitcases.tYeuThich" />
+          <AssociationSet Name="FK_Reviews_tDanhMucSP" Association="WebsiteSellingSuitcases.FK_Reviews_tDanhMucSP">
+            <End Role="tDanhMucSP" EntitySet="tDanhMucSPs" />
+            <End Role="Review" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tAnhSP_tDanhMucSP" Association="WebsiteSellingSuitcases.FK_tAnhSP_tDanhMucSP">
+            <End Role="tDanhMucSP" EntitySet="tDanhMucSPs" />
+            <End Role="tAnhSP" EntitySet="tAnhSPs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tDanhMucSP_tChatLieu" Association="WebsiteSellingSuitcases.FK_tDanhMucSP_tChatLieu">
+            <End Role="tChatLieu" EntitySet="tChatLieux" />
+            <End Role="tDanhMucSP" EntitySet="tDanhMucSPs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tChiTietHoaDon_tDanhMucSP" Association="WebsiteSellingSuitcases.FK_tChiTietHoaDon_tDanhMucSP">
+            <End Role="tDanhMucSP" EntitySet="tDanhMucSPs" />
+            <End Role="tChiTietHoaDon" EntitySet="tChiTietHoaDons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tDanhMucSP_tHangSX" Association="WebsiteSellingSuitcases.FK_tDanhMucSP_tHangSX">
+            <End Role="tHangSX" EntitySet="tHangSXes" />
+            <End Role="tDanhMucSP" EntitySet="tDanhMucSPs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tDanhMucSP_tKichThuoc" Association="WebsiteSellingSuitcases.FK_tDanhMucSP_tKichThuoc">
+            <End Role="tKichThuoc" EntitySet="tKichThuocs" />
+            <End Role="tDanhMucSP" EntitySet="tDanhMucSPs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tDanhMucSP_tLoaiDT" Association="WebsiteSellingSuitcases.FK_tDanhMucSP_tLoaiDT">
+            <End Role="tLoaiDT" EntitySet="tLoaiDTs" />
+            <End Role="tDanhMucSP" EntitySet="tDanhMucSPs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tDanhMucSP_tLoaiSP" Association="WebsiteSellingSuitcases.FK_tDanhMucSP_tLoaiSP">
+            <End Role="tLoaiSP" EntitySet="tLoaiSPs" />
+            <End Role="tDanhMucSP" EntitySet="tDanhMucSPs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tDanhMucSP_tQuocGia" Association="WebsiteSellingSuitcases.FK_tDanhMucSP_tQuocGia">
+            <End Role="tQuocGia" EntitySet="tQuocGias" />
+            <End Role="tDanhMucSP" EntitySet="tDanhMucSPs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tDinhKemSanPham_tDanhMucSP" Association="WebsiteSellingSuitcases.FK_tDinhKemSanPham_tDanhMucSP">
+            <End Role="tDanhMucSP" EntitySet="tDanhMucSPs" />
+            <End Role="tDinhKemSP" EntitySet="tDinhKemSPs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tYeuThich_tDanhMucSP" Association="WebsiteSellingSuitcases.FK_tYeuThich_tDanhMucSP">
+            <End Role="tDanhMucSP" EntitySet="tDanhMucSPs" />
+            <End Role="tYeuThich" EntitySet="tYeuThiches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tDinhKemSanPham_tDinhKem" Association="WebsiteSellingSuitcases.FK_tDinhKemSanPham_tDinhKem">
+            <End Role="tDinhKem" EntitySet="tDinhKems" />
+            <End Role="tDinhKemSP" EntitySet="tDinhKemSPs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tHangSX_tQuocGia" Association="WebsiteSellingSuitcases.FK_tHangSX_tQuocGia">
+            <End Role="tQuocGia" EntitySet="tQuocGias" />
+            <End Role="tHangSX" EntitySet="tHangSXes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tYeuThich_tKhachHang" Association="WebsiteSellingSuitcases.FK_tYeuThich_tKhachHang">
+            <End Role="tKhachHang" EntitySet="tKhachHangs" />
+            <End Role="tYeuThich" EntitySet="tYeuThiches" />
+          </AssociationSet>
+          <EntitySet Name="tBlogs" EntityType="WebsiteSellingSuitcases.tBlog" />
+          <AssociationSet Name="FK_Reviews_tBog" Association="WebsiteSellingSuitcases.FK_Reviews_tBog">
+            <End Role="tBlog" EntitySet="tBlogs" />
+            <End Role="Review" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tBog_tLoaiBlog" Association="WebsiteSellingSuitcases.FK_tBog_tLoaiBlog">
+            <End Role="tLoaiBlog" EntitySet="tLoaiBlogs" />
+            <End Role="tBlog" EntitySet="tBlogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tBog_tNhanVien" Association="WebsiteSellingSuitcases.FK_tBog_tNhanVien">
+            <End Role="tNhanVien" EntitySet="tNhanViens" />
+            <End Role="tBlog" EntitySet="tBlogs" />
+          </AssociationSet>
+          <EntitySet Name="tLienHes" EntityType="WebsiteSellingSuitcases.tLienHe" />
+          <EntitySet Name="tHoaDons" EntityType="WebsiteSellingSuitcases.tHoaDon" />
+          <AssociationSet Name="FK_tChiTietHoaDon_tHoaDonBan" Association="WebsiteSellingSuitcases.FK_tChiTietHoaDon_tHoaDonBan">
+            <End Role="tHoaDon" EntitySet="tHoaDons" />
+            <End Role="tChiTietHoaDon" EntitySet="tChiTietHoaDons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tHoaDonBan_tKhachHang" Association="WebsiteSellingSuitcases.FK_tHoaDonBan_tKhachHang">
+            <End Role="tKhachHang" EntitySet="tKhachHangs" />
+            <End Role="tHoaDon" EntitySet="tHoaDons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tHoaDonBan_tNhanVien" Association="WebsiteSellingSuitcases.FK_tHoaDonBan_tNhanVien">
+            <End Role="tNhanVien" EntitySet="tNhanViens" />
+            <End Role="tHoaDon" EntitySet="tHoaDons" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Review">
+          <Key>
+            <PropertyRef Name="Review_ID" />
+          </Key>
+          <Property Name="Review_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaSP" Type="String" MaxLength="25" FixedLength="true" Unicode="false" />
+          <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HoTen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ThoiGian" Type="DateTime" Precision="3" />
+          <Property Name="Blog_ID" Type="Int32" />
+          <NavigationProperty Name="tDanhMucSP" Relationship="WebsiteSellingSuitcases.FK_Reviews_tDanhMucSP" FromRole="Review" ToRole="tDanhMucSP" />
+          <NavigationProperty Name="tBlog" Relationship="WebsiteSellingSuitcases.FK_Reviews_tBog" FromRole="Review" ToRole="tBlog" />
+        </EntityType>
+        <EntityType Name="tADMIN">
+          <Key>
+            <PropertyRef Name="Admin" />
+          </Key>
+          <Property Name="Admin" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tAnhSP">
+          <Key>
+            <PropertyRef Name="MaSP" />
+            <PropertyRef Name="TenFileAnh" />
+          </Key>
+          <Property Name="MaSP" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="false" />
+          <Property Name="TenFileAnh" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="false" />
+          <Property Name="ViTri" Type="Int16" />
+          <NavigationProperty Name="tDanhMucSP" Relationship="WebsiteSellingSuitcases.FK_tAnhSP_tDanhMucSP" FromRole="tAnhSP" ToRole="tDanhMucSP" />
+        </EntityType>
+        <EntityType Name="tChatLieu">
+          <Key>
+            <PropertyRef Name="MaChatLieu" />
+          </Key>
+          <Property Name="MaChatLieu" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="false" />
+          <Property Name="ChatLieu" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tDanhMucSPs" Relationship="WebsiteSellingSuitcases.FK_tDanhMucSP_tChatLieu" FromRole="tChatLieu" ToRole="tDanhMucSP" />
+        </EntityType>
+        <EntityType Name="tChiTietHoaDon">
+          <Key>
+            <PropertyRef Name="SoHD" />
+            <PropertyRef Name="MaSP" />
+          </Key>
+          <Property Name="SoHD" Type="Int32" Nullable="false" />
+          <Property Name="MaSP" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="false" />
+          <Property Name="SoLuong" Type="Int32" />
+          <Property Name="GiaBan" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="ThanhTien" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="ChietKhau" Type="Double" />
+          <NavigationProperty Name="tDanhMucSP" Relationship="WebsiteSellingSuitcases.FK_tChiTietHoaDon_tDanhMucSP" FromRole="tChiTietHoaDon" ToRole="tDanhMucSP" />
+          <NavigationProperty Name="tHoaDon" Relationship="WebsiteSellingSuitcases.FK_tChiTietHoaDon_tHoaDonBan" FromRole="tChiTietHoaDon" ToRole="tHoaDon" />
+        </EntityType>
+        <EntityType Name="tDanhMucSP">
+          <Key>
+            <PropertyRef Name="MaSP" />
+          </Key>
+          <Property Name="MaSP" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="false" />
+          <Property Name="TenSP" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="MaChatLieu" Type="String" MaxLength="25" FixedLength="true" Unicode="false" />
+          <Property Name="NganLapTop" Type="String" MaxLength="55" FixedLength="false" Unicode="true" />
+          <Property Name="MauSac" Type="String" MaxLength="55" FixedLength="false" Unicode="true" />
+          <Property Name="MaKichThuoc" Type="String" MaxLength="25" FixedLength="true" Unicode="false" />
+          <Property Name="CanNang" Type="Double" />
+          <Property Name="DoNoi" Type="Double" />
+          <Property Name="MaHangSX" Type="String" MaxLength="25" FixedLength="true" Unicode="false" />
+          <Property Name="MaNuocSX" Type="String" MaxLength="25" FixedLength="true" Unicode="false" />
+          <Property Name="Website" Type="String" MaxLength="155" FixedLength="true" Unicode="false" />
+          <Property Name="ThoiGianBaoHanh" Type="Double" />
+          <Property Name="GioiThieuSP" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="GiaBan" Type="Double" />
+          <Property Name="ChietKhau" Type="Double" />
+          <Property Name="MaLoai" Type="String" MaxLength="25" FixedLength="true" Unicode="false" />
+          <Property Name="MaDT" Type="String" MaxLength="25" FixedLength="true" Unicode="false" />
+          <Property Name="Anh" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+          <Property Name="SoLuong" Type="Int32" />
+          <Property Name="NgayTao" Type="DateTime" Precision="3" />
+          <Property Name="GiaNhap" Type="Double" />
+          <Property Name="LuotXem" Type="Int32" />
+          <NavigationProperty Name="Reviews" Relationship="WebsiteSellingSuitcases.FK_Reviews_tDanhMucSP" FromRole="tDanhMucSP" ToRole="Review" />
+          <NavigationProperty Name="tAnhSPs" Relationship="WebsiteSellingSuitcases.FK_tAnhSP_tDanhMucSP" FromRole="tDanhMucSP" ToRole="tAnhSP" />
+          <NavigationProperty Name="tChatLieu" Relationship="WebsiteSellingSuitcases.FK_tDanhMucSP_tChatLieu" FromRole="tDanhMucSP" ToRole="tChatLieu" />
+          <NavigationProperty Name="tChiTietHoaDons" Relationship="WebsiteSellingSuitcases.FK_tChiTietHoaDon_tDanhMucSP" FromRole="tDanhMucSP" ToRole="tChiTietHoaDon" />
+          <NavigationProperty Name="tHangSX" Relationship="WebsiteSellingSuitcases.FK_tDanhMucSP_tHangSX" FromRole="tDanhMucSP" ToRole="tHangSX" />
+          <NavigationProperty Name="tKichThuoc" Relationship="WebsiteSellingSuitcases.FK_tDanhMucSP_tKichThuoc" FromRole="tDanhMucSP" ToRole="tKichThuoc" />
+          <NavigationProperty Name="tLoaiDT" Relationship="WebsiteSellingSuitcases.FK_tDanhMucSP_tLoaiDT" FromRole="tDanhMucSP" ToRole="tLoaiDT" />
+          <NavigationProperty Name="tLoaiSP" Relationship="WebsiteSellingSuitcases.FK_tDanhMucSP_tLoaiSP" FromRole="tDanhMucSP" ToRole="tLoaiSP" />
+          <NavigationProperty Name="tQuocGia" Relationship="WebsiteSellingSuitcases.FK_tDanhMucSP_tQuocGia" FromRole="tDanhMucSP" ToRole="tQuocGia" />
+          <NavigationProperty Name="tDinhKemSPs" Relationship="WebsiteSellingSuitcases.FK_tDinhKemSanPham_tDanhMucSP" FromRole="tDanhMucSP" ToRole="tDinhKemSP" />
+          <NavigationProperty Name="tYeuThiches" Relationship="WebsiteSellingSuitcases.FK_tYeuThich_tDanhMucSP" FromRole="tDanhMucSP" ToRole="tYeuThich" />
+        </EntityType>
+        <EntityType Name="tDinhKem">
+          <Key>
+            <PropertyRef Name="MaDK" />
+          </Key>
+          <Property Name="MaDK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TieuDe" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tDinhKemSPs" Relationship="WebsiteSellingSuitcases.FK_tDinhKemSanPham_tDinhKem" FromRole="tDinhKem" ToRole="tDinhKemSP" />
+        </EntityType>
+        <EntityType Name="tDinhKemSP">
+          <Key>
+            <PropertyRef Name="MaDK" />
+            <PropertyRef Name="MaSP" />
+          </Key>
+          <Property Name="MaDK" Type="Int32" Nullable="false" />
+          <Property Name="MaSP" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="false" />
+          <Property Name="Dummy" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="tDanhMucSP" Relationship="WebsiteSellingSuitcases.FK_tDinhKemSanPham_tDanhMucSP" FromRole="tDinhKemSP" ToRole="tDanhMucSP" />
+          <NavigationProperty Name="tDinhKem" Relationship="WebsiteSellingSuitcases.FK_tDinhKemSanPham_tDinhKem" FromRole="tDinhKemSP" ToRole="tDinhKem" />
+        </EntityType>
+        <EntityType Name="tHangSX">
+          <Key>
+            <PropertyRef Name="MaHangSX" />
+          </Key>
+          <Property Name="MaHangSX" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="false" />
+          <Property Name="HangSX" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MaNuocThuongHieu" Type="String" MaxLength="25" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="tDanhMucSPs" Relationship="WebsiteSellingSuitcases.FK_tDanhMucSP_tHangSX" FromRole="tHangSX" ToRole="tDanhMucSP" />
+          <NavigationProperty Name="tQuocGia" Relationship="WebsiteSellingSuitcases.FK_tHangSX_tQuocGia" FromRole="tHangSX" ToRole="tQuocGia" />
+        </EntityType>
+        <EntityType Name="tKhachHang">
+          <Key>
+            <PropertyRef Name="MaKH" />
+          </Key>
+          <Property Name="MaKH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenNguoiDung" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MatKhau" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="TenKH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DiaChi" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="DienThoai" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="GioiTinh" Type="Boolean" />
+          <Property Name="Huyen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ThanhPho" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tYeuThiches" Relationship="WebsiteSellingSuitcases.FK_tYeuThich_tKhachHang" FromRole="tKhachHang" ToRole="tYeuThich" />
+          <NavigationProperty Name="tHoaDons" Relationship="WebsiteSellingSuitcases.FK_tHoaDonBan_tKhachHang" FromRole="tKhachHang" ToRole="tHoaDon" />
+        </EntityType>
+        <EntityType Name="tKichThuoc">
+          <Key>
+            <PropertyRef Name="MaKichThuoc" />
+          </Key>
+          <Property Name="MaKichThuoc" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="false" />
+          <Property Name="KichThuoc" Type="String" MaxLength="150" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="tDanhMucSPs" Relationship="WebsiteSellingSuitcases.FK_tDanhMucSP_tKichThuoc" FromRole="tKichThuoc" ToRole="tDanhMucSP" />
+        </EntityType>
+        <EntityType Name="tLoaiBlog">
+          <Key>
+            <PropertyRef Name="MaLoaiBlog" />
+          </Key>
+          <Property Name="MaLoaiBlog" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tBlogs" Relationship="WebsiteSellingSuitcases.FK_tBog_tLoaiBlog" FromRole="tLoaiBlog" ToRole="tBlog" />
+        </EntityType>
+        <EntityType Name="tLoaiDT">
+          <Key>
+            <PropertyRef Name="MaDT" />
+          </Key>
+          <Property Name="MaDT" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="false" />
+          <Property Name="TenLoai" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tDanhMucSPs" Relationship="WebsiteSellingSuitcases.FK_tDanhMucSP_tLoaiDT" FromRole="tLoaiDT" ToRole="tDanhMucSP" />
+        </EntityType>
+        <EntityType Name="tLoaiSP">
+          <Key>
+            <PropertyRef Name="MaLoai" />
+          </Key>
+          <Property Name="MaLoai" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="false" />
+          <Property Name="Loai" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tDanhMucSPs" Relationship="WebsiteSellingSuitcases.FK_tDanhMucSP_tLoaiSP" FromRole="tLoaiSP" ToRole="tDanhMucSP" />
+        </EntityType>
+        <EntityType Name="tNhanVien">
+          <Key>
+            <PropertyRef Name="MaNV" />
+          </Key>
+          <Property Name="MaNV" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenNguoiDung" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MatKhau" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="TenNV" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DiaChi" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="DienThoai" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="GioiTinh" Type="Boolean" />
+          <NavigationProperty Name="tBlogs" Relationship="WebsiteSellingSuitcases.FK_tBog_tNhanVien" FromRole="tNhanVien" ToRole="tBlog" />
+          <NavigationProperty Name="tHoaDons" Relationship="WebsiteSellingSuitcases.FK_tHoaDonBan_tNhanVien" FromRole="tNhanVien" ToRole="tHoaDon" />
+        </EntityType>
+        <EntityType Name="tQuocGia">
+          <Key>
+            <PropertyRef Name="MaNuoc" />
+          </Key>
+          <Property Name="MaNuoc" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="false" />
+          <Property Name="TenNuoc" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tDanhMucSPs" Relationship="WebsiteSellingSuitcases.FK_tDanhMucSP_tQuocGia" FromRole="tQuocGia" ToRole="tDanhMucSP" />
+          <NavigationProperty Name="tHangSXes" Relationship="WebsiteSellingSuitcases.FK_tHangSX_tQuocGia" FromRole="tQuocGia" ToRole="tHangSX" />
+        </EntityType>
+        <EntityType Name="tYeuThich">
+          <Key>
+            <PropertyRef Name="MaSP" />
+            <PropertyRef Name="MaKH" />
+          </Key>
+          <Property Name="MaSP" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="false" />
+          <Property Name="MaKH" Type="Int32" Nullable="false" />
+          <Property Name="Ngay" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tDanhMucSP" Relationship="WebsiteSellingSuitcases.FK_tYeuThich_tDanhMucSP" FromRole="tYeuThich" ToRole="tDanhMucSP" />
+          <NavigationProperty Name="tKhachHang" Relationship="WebsiteSellingSuitcases.FK_tYeuThich_tKhachHang" FromRole="tYeuThich" ToRole="tKhachHang" />
+        </EntityType>
+        <Association Name="FK_Reviews_tDanhMucSP">
+          <End Type="WebsiteSellingSuitcases.tDanhMucSP" Role="tDanhMucSP" Multiplicity="0..1" />
+          <End Type="WebsiteSellingSuitcases.Review" Role="Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tDanhMucSP">
+              <PropertyRef Name="MaSP" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="MaSP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tAnhSP_tDanhMucSP">
+          <End Type="WebsiteSellingSuitcases.tDanhMucSP" Role="tDanhMucSP" Multiplicity="1" />
+          <End Type="WebsiteSellingSuitcases.tAnhSP" Role="tAnhSP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tDanhMucSP">
+              <PropertyRef Name="MaSP" />
+            </Principal>
+            <Dependent Role="tAnhSP">
+              <PropertyRef Name="MaSP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tDanhMucSP_tChatLieu">
+          <End Type="WebsiteSellingSuitcases.tChatLieu" Role="tChatLieu" Multiplicity="0..1" />
+          <End Type="WebsiteSellingSuitcases.tDanhMucSP" Role="tDanhMucSP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tChatLieu">
+              <PropertyRef Name="MaChatLieu" />
+            </Principal>
+            <Dependent Role="tDanhMucSP">
+              <PropertyRef Name="MaChatLieu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tChiTietHoaDon_tDanhMucSP">
+          <End Type="WebsiteSellingSuitcases.tDanhMucSP" Role="tDanhMucSP" Multiplicity="1" />
+          <End Type="WebsiteSellingSuitcases.tChiTietHoaDon" Role="tChiTietHoaDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tDanhMucSP">
+              <PropertyRef Name="MaSP" />
+            </Principal>
+            <Dependent Role="tChiTietHoaDon">
+              <PropertyRef Name="MaSP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tDanhMucSP_tHangSX">
+          <End Type="WebsiteSellingSuitcases.tHangSX" Role="tHangSX" Multiplicity="0..1" />
+          <End Type="WebsiteSellingSuitcases.tDanhMucSP" Role="tDanhMucSP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tHangSX">
+              <PropertyRef Name="MaHangSX" />
+            </Principal>
+            <Dependent Role="tDanhMucSP">
+              <PropertyRef Name="MaHangSX" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tDanhMucSP_tKichThuoc">
+          <End Type="WebsiteSellingSuitcases.tKichThuoc" Role="tKichThuoc" Multiplicity="0..1" />
+          <End Type="WebsiteSellingSuitcases.tDanhMucSP" Role="tDanhMucSP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tKichThuoc">
+              <PropertyRef Name="MaKichThuoc" />
+            </Principal>
+            <Dependent Role="tDanhMucSP">
+              <PropertyRef Name="MaKichThuoc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tDanhMucSP_tLoaiDT">
+          <End Type="WebsiteSellingSuitcases.tLoaiDT" Role="tLoaiDT" Multiplicity="0..1" />
+          <End Type="WebsiteSellingSuitcases.tDanhMucSP" Role="tDanhMucSP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tLoaiDT">
+              <PropertyRef Name="MaDT" />
+            </Principal>
+            <Dependent Role="tDanhMucSP">
+              <PropertyRef Name="MaDT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tDanhMucSP_tLoaiSP">
+          <End Type="WebsiteSellingSuitcases.tLoaiSP" Role="tLoaiSP" Multiplicity="0..1" />
+          <End Type="WebsiteSellingSuitcases.tDanhMucSP" Role="tDanhMucSP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tLoaiSP">
+              <PropertyRef Name="MaLoai" />
+            </Principal>
+            <Dependent Role="tDanhMucSP">
+              <PropertyRef Name="MaLoai" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tDanhMucSP_tQuocGia">
+          <End Type="WebsiteSellingSuitcases.tQuocGia" Role="tQuocGia" Multiplicity="0..1" />
+          <End Type="WebsiteSellingSuitcases.tDanhMucSP" Role="tDanhMucSP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tQuocGia">
+              <PropertyRef Name="MaNuoc" />
+            </Principal>
+            <Dependent Role="tDanhMucSP">
+              <PropertyRef Name="MaNuocSX" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tDinhKemSanPham_tDanhMucSP">
+          <End Type="WebsiteSellingSuitcases.tDanhMucSP" Role="tDanhMucSP" Multiplicity="1" />
+          <End Type="WebsiteSellingSuitcases.tDinhKemSP" Role="tDinhKemSP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tDanhMucSP">
+              <PropertyRef Name="MaSP" />
+            </Principal>
+            <Dependent Role="tDinhKemSP">
+              <PropertyRef Name="MaSP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tYeuThich_tDanhMucSP">
+          <End Type="WebsiteSellingSuitcases.tDanhMucSP" Role="tDanhMucSP" Multiplicity="1" />
+          <End Type="WebsiteSellingSuitcases.tYeuThich" Role="tYeuThich" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tDanhMucSP">
+              <PropertyRef Name="MaSP" />
+            </Principal>
+            <Dependent Role="tYeuThich">
+              <PropertyRef Name="MaSP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tDinhKemSanPham_tDinhKem">
+          <End Type="WebsiteSellingSuitcases.tDinhKem" Role="tDinhKem" Multiplicity="1" />
+          <End Type="WebsiteSellingSuitcases.tDinhKemSP" Role="tDinhKemSP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tDinhKem">
+              <PropertyRef Name="MaDK" />
+            </Principal>
+            <Dependent Role="tDinhKemSP">
+              <PropertyRef Name="MaDK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tHangSX_tQuocGia">
+          <End Type="WebsiteSellingSuitcases.tQuocGia" Role="tQuocGia" Multiplicity="0..1" />
+          <End Type="WebsiteSellingSuitcases.tHangSX" Role="tHangSX" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tQuocGia">
+              <PropertyRef Name="MaNuoc" />
+            </Principal>
+            <Dependent Role="tHangSX">
+              <PropertyRef Name="MaNuocThuongHieu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tYeuThich_tKhachHang">
+          <End Type="WebsiteSellingSuitcases.tKhachHang" Role="tKhachHang" Multiplicity="1" />
+          <End Type="WebsiteSellingSuitcases.tYeuThich" Role="tYeuThich" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tKhachHang">
+              <PropertyRef Name="MaKH" />
+            </Principal>
+            <Dependent Role="tYeuThich">
+              <PropertyRef Name="MaKH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tBlog">
+          <Key>
+            <PropertyRef Name="Blog_ID" />
+          </Key>
+          <Property Name="Blog_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TieuDe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TomTat" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ChiTiet" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MaLoaiBlog" Type="Int32" />
+          <Property Name="AnhBlog" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Ngay" Type="DateTime" Precision="3" />
+          <Property Name="MaNV" Type="Int32" />
+          <NavigationProperty Name="Reviews" Relationship="WebsiteSellingSuitcases.FK_Reviews_tBog" FromRole="tBlog" ToRole="Review" />
+          <NavigationProperty Name="tLoaiBlog" Relationship="WebsiteSellingSuitcases.FK_tBog_tLoaiBlog" FromRole="tBlog" ToRole="tLoaiBlog" />
+          <NavigationProperty Name="tNhanVien" Relationship="WebsiteSellingSuitcases.FK_tBog_tNhanVien" FromRole="tBlog" ToRole="tNhanVien" />
+          <Property Name="LuotXem" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_Reviews_tBog">
+          <End Type="WebsiteSellingSuitcases.tBlog" Role="tBlog" Multiplicity="0..1" />
+          <End Type="WebsiteSellingSuitcases.Review" Role="Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tBlog">
+              <PropertyRef Name="Blog_ID" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="Blog_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tBog_tLoaiBlog">
+          <End Type="WebsiteSellingSuitcases.tLoaiBlog" Role="tLoaiBlog" Multiplicity="0..1" />
+          <End Type="WebsiteSellingSuitcases.tBlog" Role="tBlog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tLoaiBlog">
+              <PropertyRef Name="MaLoaiBlog" />
+            </Principal>
+            <Dependent Role="tBlog">
+              <PropertyRef Name="MaLoaiBlog" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tBog_tNhanVien">
+          <End Type="WebsiteSellingSuitcases.tNhanVien" Role="tNhanVien" Multiplicity="0..1" />
+          <End Type="WebsiteSellingSuitcases.tBlog" Role="tBlog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tNhanVien">
+              <PropertyRef Name="MaNV" />
+            </Principal>
+            <Dependent Role="tBlog">
+              <PropertyRef Name="MaNV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tLienHe">
+          <Key>
+            <PropertyRef Name="Contact_ID" />
+          </Key>
+          <Property Name="Contact_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HoTen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TieuDe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DienThoai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TinNhan" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Ngay" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="tHoaDon">
+          <Key>
+            <PropertyRef Name="SoHD" />
+          </Key>
+          <Property Name="SoHD" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NgayBan_NgayNhap" Type="DateTime" Precision="3" />
+          <Property Name="MaKH" Type="Int32" />
+          <Property Name="NgayThanhToan" Type="DateTime" Precision="3" />
+          <Property Name="TongTien" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="MaNV" Type="Int32" />
+          <Property Name="Loai" Type="Boolean" />
+          <Property Name="NoiDung" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Ship" Type="Boolean" />
+          <Property Name="XacNhan" Type="Int32" />
+          <NavigationProperty Name="tChiTietHoaDons" Relationship="WebsiteSellingSuitcases.FK_tChiTietHoaDon_tHoaDonBan" FromRole="tHoaDon" ToRole="tChiTietHoaDon" />
+          <NavigationProperty Name="tKhachHang" Relationship="WebsiteSellingSuitcases.FK_tHoaDonBan_tKhachHang" FromRole="tHoaDon" ToRole="tKhachHang" />
+          <NavigationProperty Name="tNhanVien" Relationship="WebsiteSellingSuitcases.FK_tHoaDonBan_tNhanVien" FromRole="tHoaDon" ToRole="tNhanVien" />
+        </EntityType>
+        <Association Name="FK_tChiTietHoaDon_tHoaDonBan">
+          <End Type="WebsiteSellingSuitcases.tHoaDon" Role="tHoaDon" Multiplicity="1" />
+          <End Type="WebsiteSellingSuitcases.tChiTietHoaDon" Role="tChiTietHoaDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tHoaDon">
+              <PropertyRef Name="SoHD" />
+            </Principal>
+            <Dependent Role="tChiTietHoaDon">
+              <PropertyRef Name="SoHD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tHoaDonBan_tKhachHang">
+          <End Type="WebsiteSellingSuitcases.tKhachHang" Role="tKhachHang" Multiplicity="0..1" />
+          <End Type="WebsiteSellingSuitcases.tHoaDon" Role="tHoaDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tKhachHang">
+              <PropertyRef Name="MaKH" />
+            </Principal>
+            <Dependent Role="tHoaDon">
+              <PropertyRef Name="MaKH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tHoaDonBan_tNhanVien">
+          <End Type="WebsiteSellingSuitcases.tNhanVien" Role="tNhanVien" Multiplicity="0..1" />
+          <End Type="WebsiteSellingSuitcases.tHoaDon" Role="tHoaDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tNhanVien">
+              <PropertyRef Name="MaNV" />
+            </Principal>
+            <Dependent Role="tHoaDon">
+              <PropertyRef Name="MaNV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WebsiteSellingSuitcasesStoreContainer" CdmEntityContainer="WebsiteSellingSuitcasesEntities">
+          <EntitySetMapping Name="Reviews">
+            <EntityTypeMapping TypeName="WebsiteSellingSuitcases.Review">
+              <MappingFragment StoreEntitySet="Reviews">
+                <ScalarProperty Name="Blog_ID" ColumnName="Blog_ID" />
+                <ScalarProperty Name="ThoiGian" ColumnName="ThoiGian" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="MaSP" ColumnName="MaSP" />
+                <ScalarProperty Name="Review_ID" ColumnName="Review_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tADMINs">
+            <EntityTypeMapping TypeName="WebsiteSellingSuitcases.tADMIN">
+              <MappingFragment StoreEntitySet="tADMIN">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Admin" ColumnName="Admin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tAnhSPs">
+            <EntityTypeMapping TypeName="WebsiteSellingSuitcases.tAnhSP">
+              <MappingFragment StoreEntitySet="tAnhSP">
+                <ScalarProperty Name="ViTri" ColumnName="ViTri" />
+                <ScalarProperty Name="TenFileAnh" ColumnName="TenFileAnh" />
+                <ScalarProperty Name="MaSP" ColumnName="MaSP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tChatLieux">
+            <EntityTypeMapping TypeName="WebsiteSellingSuitcases.tChatLieu">
+              <MappingFragment StoreEntitySet="tChatLieu">
+                <ScalarProperty Name="ChatLieu" ColumnName="ChatLieu" />
+                <ScalarProperty Name="MaChatLieu" ColumnName="MaChatLieu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tChiTietHoaDons">
+            <EntityTypeMapping TypeName="WebsiteSellingSuitcases.tChiTietHoaDon">
+              <MappingFragment StoreEntitySet="tChiTietHoaDon">
+                <ScalarProperty Name="ChietKhau" ColumnName="ChietKhau" />
+                <ScalarProperty Name="ThanhTien" ColumnName="ThanhTien" />
+                <ScalarProperty Name="GiaBan" ColumnName="GiaBan" />
+                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+                <ScalarProperty Name="MaSP" ColumnName="MaSP" />
+                <ScalarProperty Name="SoHD" ColumnName="SoHD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tDanhMucSPs">
+            <EntityTypeMapping TypeName="WebsiteSellingSuitcases.tDanhMucSP">
+              <MappingFragment StoreEntitySet="tDanhMucSP">
+                <ScalarProperty Name="LuotXem" ColumnName="LuotXem" />
+                <ScalarProperty Name="GiaNhap" ColumnName="GiaNhap" />
+                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
+                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+                <ScalarProperty Name="Anh" ColumnName="Anh" />
+                <ScalarProperty Name="MaDT" ColumnName="MaDT" />
+                <ScalarProperty Name="MaLoai" ColumnName="MaLoai" />
+                <ScalarProperty Name="ChietKhau" ColumnName="ChietKhau" />
+                <ScalarProperty Name="GiaBan" ColumnName="GiaBan" />
+                <ScalarProperty Name="GioiThieuSP" ColumnName="GioiThieuSP" />
+                <ScalarProperty Name="ThoiGianBaoHanh" ColumnName="ThoiGianBaoHanh" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="MaNuocSX" ColumnName="MaNuocSX" />
+                <ScalarProperty Name="MaHangSX" ColumnName="MaHangSX" />
+                <ScalarProperty Name="DoNoi" ColumnName="DoNoi" />
+                <ScalarProperty Name="CanNang" ColumnName="CanNang" />
+                <ScalarProperty Name="MaKichThuoc" ColumnName="MaKichThuoc" />
+                <ScalarProperty Name="MauSac" ColumnName="MauSac" />
+                <ScalarProperty Name="NganLapTop" ColumnName="NganLapTop" />
+                <ScalarProperty Name="MaChatLieu" ColumnName="MaChatLieu" />
+                <ScalarProperty Name="TenSP" ColumnName="TenSP" />
+                <ScalarProperty Name="MaSP" ColumnName="MaSP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tDinhKems">
+            <EntityTypeMapping TypeName="WebsiteSellingSuitcases.tDinhKem">
+              <MappingFragment StoreEntitySet="tDinhKem">
+                <ScalarProperty Name="TieuDe" ColumnName="TieuDe" />
+                <ScalarProperty Name="MaDK" ColumnName="MaDK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tDinhKemSPs">
+            <EntityTypeMapping TypeName="WebsiteSellingSuitcases.tDinhKemSP">
+              <MappingFragment StoreEntitySet="tDinhKemSP">
+                <ScalarProperty Name="Dummy" ColumnName="Dummy" />
+                <ScalarProperty Name="MaSP" ColumnName="MaSP" />
+                <ScalarProperty Name="MaDK" ColumnName="MaDK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tHangSXes">
+            <EntityTypeMapping TypeName="WebsiteSellingSuitcases.tHangSX">
+              <MappingFragment StoreEntitySet="tHangSX">
+                <ScalarProperty Name="MaNuocThuongHieu" ColumnName="MaNuocThuongHieu" />
+                <ScalarProperty Name="HangSX" ColumnName="HangSX" />
+                <ScalarProperty Name="MaHangSX" ColumnName="MaHangSX" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tKhachHangs">
+            <EntityTypeMapping TypeName="WebsiteSellingSuitcases.tKhachHang">
+              <MappingFragment StoreEntitySet="tKhachHang">
+                <ScalarProperty Name="ThanhPho" ColumnName="ThanhPho" />
+                <ScalarProperty Name="Huyen" ColumnName="Huyen" />
+                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DienThoai" ColumnName="DienThoai" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="TenKH" ColumnName="TenKH" />
+                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
+                <ScalarProperty Name="TenNguoiDung" ColumnName="TenNguoiDung" />
+                <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tKichThuocs">
+            <EntityTypeMapping TypeName="WebsiteSellingSuitcases.tKichThuoc">
+              <MappingFragment StoreEntitySet="tKichThuoc">
+                <ScalarProperty Name="KichThuoc" ColumnName="KichThuoc" />
+                <ScalarProperty Name="MaKichThuoc" ColumnName="MaKichThuoc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tLoaiBlogs">
+            <EntityTypeMapping TypeName="WebsiteSellingSuitcases.tLoaiBlog">
+              <MappingFragment StoreEntitySet="tLoaiBlog">
+                <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="MaLoaiBlog" ColumnName="MaLoaiBlog" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tLoaiDTs">
+            <EntityTypeMapping TypeName="WebsiteSellingSuitcases.tLoaiDT">
+              <MappingFragment StoreEntitySet="tLoaiDT">
+                <ScalarProperty Name="TenLoai" ColumnName="TenLoai" />
+                <ScalarProperty Name="MaDT" ColumnName="MaDT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tLoaiSPs">
+            <EntityTypeMapping TypeName="WebsiteSellingSuitcases.tLoaiSP">
+              <MappingFragment StoreEntitySet="tLoaiSP">
+                <ScalarProperty Name="Loai" ColumnName="Loai" />
+                <ScalarProperty Name="MaLoai" ColumnName="MaLoai" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tNhanViens">
+            <EntityTypeMapping TypeName="WebsiteSellingSuitcases.tNhanVien">
+              <MappingFragment StoreEntitySet="tNhanVien">
+                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DienThoai" ColumnName="DienThoai" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="TenNV" ColumnName="TenNV" />
+                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
+                <ScalarProperty Name="TenNguoiDung" ColumnName="TenNguoiDung" />
+                <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tQuocGias">
+            <EntityTypeMapping TypeName="WebsiteSellingSuitcases.tQuocGia">
+              <MappingFragment StoreEntitySet="tQuocGia">
+                <ScalarProperty Name="TenNuoc" ColumnName="TenNuoc" />
+                <ScalarProperty Name="MaNuoc" ColumnName="MaNuoc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tYeuThiches">
+            <EntityTypeMapping TypeName="WebsiteSellingSuitcases.tYeuThich">
+              <MappingFragment StoreEntitySet="tYeuThich">
+                <ScalarProperty Name="Ngay" ColumnName="Ngay" />
+                <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+                <ScalarProperty Name="MaSP" ColumnName="MaSP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tBlogs">
+            <EntityTypeMapping TypeName="WebsiteSellingSuitcases.tBlog">
+              <MappingFragment StoreEntitySet="tBlog">
+                <ScalarProperty Name="LuotXem" ColumnName="LuotXem" />
+                <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+                <ScalarProperty Name="Ngay" ColumnName="Ngay" />
+                <ScalarProperty Name="AnhBlog" ColumnName="AnhBlog" />
+                <ScalarProperty Name="MaLoaiBlog" ColumnName="MaLoaiBlog" />
+                <ScalarProperty Name="ChiTiet" ColumnName="ChiTiet" />
+                <ScalarProperty Name="TomTat" ColumnName="TomTat" />
+                <ScalarProperty Name="TieuDe" ColumnName="TieuDe" />
+                <ScalarProperty Name="Blog_ID" ColumnName="Blog_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tLienHes">
+            <EntityTypeMapping TypeName="WebsiteSellingSuitcases.tLienHe">
+              <MappingFragment StoreEntitySet="tLienHe">
+                <ScalarProperty Name="Ngay" ColumnName="Ngay" />
+                <ScalarProperty Name="TinNhan" ColumnName="TinNhan" />
+                <ScalarProperty Name="DienThoai" ColumnName="DienThoai" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="TieuDe" ColumnName="TieuDe" />
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+                <ScalarProperty Name="Contact_ID" ColumnName="Contact_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tHoaDons">
+            <EntityTypeMapping TypeName="WebsiteSellingSuitcases.tHoaDon">
+              <MappingFragment StoreEntitySet="tHoaDon">
+                <ScalarProperty Name="XacNhan" ColumnName="XacNhan" />
+                <ScalarProperty Name="Ship" ColumnName="Ship" />
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="Loai" ColumnName="Loai" />
+                <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+                <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+                <ScalarProperty Name="NgayThanhToan" ColumnName="NgayThanhToan" />
+                <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+                <ScalarProperty Name="NgayBan_NgayNhap" ColumnName="NgayBan/NgayNhap" />
+                <ScalarProperty Name="SoHD" ColumnName="SoHD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

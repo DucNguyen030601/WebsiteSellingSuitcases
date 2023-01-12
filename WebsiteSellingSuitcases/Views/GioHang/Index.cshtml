@@ -1,0 +1,135 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutSP.cshtml";
+}
+@model List<WebsiteSellingSuitcases.Models.GioHang>
+@using WebsiteSellingSuitcases.Models
+@{
+    WebsiteSellingSuitcasesEntities db = new WebsiteSellingSuitcasesEntities();
+    int getTotalProduct(string MaSP)
+    {
+        return (int)db.tDanhMucSPs.SingleOrDefault(n => n.MaSP == MaSP).SoLuong;
+    }
+ }
+<div class="breadcrumbs_area">
+    <div class="row">
+        <div class="col-12">
+            <div class="breadcrumb_content">
+                <ul>
+                    <li><a href="@Url.Action("Index", "Home")">Trang chủ</a></li>
+                    <li><i class="fa fa-angle-right"></i></li>
+                    <li title="navGioHang">Giỏ hàng</li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--breadcrumbs area end-->
+<!--shopping cart area start -->
+<div class="shopping_cart_area">
+    <div class="row">
+        <div class="col-12">
+            <div class="coron_table table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="product_remove">Xoá</th>
+                            <th class="product_thumb" width="150px">Ảnh</th>
+                            <th class="product_name">Sản Phẩm</th>
+                            <th class="product_name">Tình trạng</th>
+                            <th class="product-price">Giá</th>
+                            <th class="product_price">Chiết Khấu</th>
+                            <th class="product_quantity">Số Lượng</th>
+                            <th class="product_total">Thành Tiền</th>
+                            <th class="product_remove"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (var item in Model)
+                            {
+
+                                <tr>
+                                    @using (Html.BeginForm("XoaGioHang", "GioHang", new { sMaSP = item.sMaSP, strUrl = Request.Url.ToString() }))
+                                    {
+                                        <td >
+                                            <button style="background-color:white;color:blue;border:0px" type="submit"><i class="fa fa-trash-o" style="font-size:30px"></i></button>
+                                        </td>
+                                    }
+                                    <td ><img width="50%" src="~/Images/@item.sHinhAnh" alt=""></td>
+                                    <td ><a href="@Url.Action("Details","SanPham",new {MaSP=item.sMaSP })">@item.sTenSP</a></td>
+                                    <td ><a style="color:red">Còn @getTotalProduct(item.sMaSP) sản phẩm</a></td>
+                                    <td >@String.Format("{0:0,0 VNĐ}", item.sGiaBan)</td>
+                                    <td >@(item.sChietKhau*100)%</td>
+
+                                    @using (Html.BeginForm("CapNhapGioHang", "GioHang", new { sMaSP = item.sMaSP, strUrl = Request.Url.ToString() }))
+                                    {
+                                        <td ><input min="0" max="100" value="@item.iSoLuong" type="number" name="txtSoLuong"></td>
+                                        <td >@String.Format("{0:0,0 VNĐ}", item.dThanhTien)</td>
+                                        <td >
+                                            <button class="btn btn-danger" type="submit">Cập nhật</button>
+                                        </td>
+                                    }
+                                </tr>
+                            }
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+            </div>
+          
+    </div>
+    <!--coupon code area start-->
+    <div class="coupon_area">
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <div class="coupon_code">
+                    <h3>Coupon</h3>
+                    <div class="coupon_inner">
+                        <p>Enter your coupon code if you have one.</p>
+                        <input placeholder="Coupon code" type="text">
+                        <button type="submit">Apply coupon</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="coupon_code">
+                    <h3>TỔNG SỐ GIỎ HÀNG</h3>
+                    <div class="coupon_inner">
+                        <div class="cart_subtotal">
+                            <p>Tổng Phụ</p>
+                            <p class="cart_amount">@String.Format("{0:0,0 VNĐ}", ViewBag.TongTien - ViewBag.PhiShip)</p>
+                        </div>
+                        <div class="cart_subtotal ">
+                            <p>Tiền Ship</p>
+                            <p class="cart_amount"><span>Tỷ giá cố định:</span> @String.Format("{0:0,0 VNĐ}", ViewBag.PhiShip)</p>
+                        </div>
+                        <a href="#">Mua 3 sản phẩm trở nên bạn được miễn phí ship...!</a>
+
+                        <div class="cart_subtotal">
+                            <p>Tổng Tiền</p>
+                            <p class="cart_amount">@String.Format("{0:0,0 VNĐ}", ViewBag.TongTien)</p>
+                        </div>
+                        @if (ViewBag.TongTien != 0)
+                        {
+                            <div class="checkout_btn">
+                                <a href="/GioHang/ThuTucThanhToan">Tiến hành kiểm tra</a>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--coupon code area end-->
+</div>
+<!--shopping cart area end -->
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script>
+    $(document).ready(function () {
+        if ("@TempData["ThongTinDatHang"]" != "") alert(@Html.Raw(Json.Encode(TempData["ThongTinDatHang"])))
+    })
+</script>

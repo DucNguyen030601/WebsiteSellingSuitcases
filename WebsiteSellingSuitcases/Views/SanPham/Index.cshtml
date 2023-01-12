@@ -1,0 +1,477 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutSP.cshtml";
+}
+@using PagedList;
+@using PagedList.Mvc;
+@model PagedList<WebsiteSellingSuitcases.Models.tDanhMucSP>
+@using WebsiteSellingSuitcases.Models;
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/assets/js/main.js"></script>
+<!--breadcrumbs area start-->
+<div class="breadcrumbs_area">
+    <div class="row">
+        <div class="col-12">
+            <div class="breadcrumb_content">
+                <ul>
+                    <li><a href="index.html">Trang chủ</a></li>
+                    @{
+
+                        if (ViewBag.MaLoai != "")
+                        {
+                            <li><i class="fa fa-angle-right"></i></li>
+                            <li title="@Url.Content("nav"+ViewBag.MaLoai)">@ViewBag.MaLoai</li>
+                        }
+                        if (ViewBag.Tag != null)
+                        {
+                            <li><i class="fa fa-angle-right"></i></li>
+                            <li>Tag @ViewBag.Tag</li>
+                        }
+                        if (ViewBag.TimKiem != "")
+                        {
+                            <li><i class="fa fa-angle-right"></i></li>
+                            <li>Tìm kiếm @ViewBag.TimKiem</li>
+                        }
+                    }
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!--breadcrumbs area end-->
+<!--pos home section-->
+<div class=" pos_home_section">
+    <div class="row pos_home">
+        <div class="col-lg-3 col-md-12">
+            <!--layere categorie"-->
+            <div class="sidebar_widget shop_c">
+                <div class="categorie__titile">
+                    <h4>Thể loại</h4>
+                </div>
+                <div class="layere_categorie">
+                    <ul>
+                        @{
+                            List<tDanhMucSP> sp = ViewBag.SanPham;
+                            var result = (from p in sp
+                                          group p by new { p.tLoaiDT.TenLoai, p.MaDT } into count
+                                          select new
+                                          {
+                                              Ten = count.Key.TenLoai,
+                                              Ma = count.Key.MaDT,
+                                              Sluong = count.Count()
+                                          });
+                            foreach (var item in result)
+                            {
+
+                                <li>
+
+                                    <input id="acces" type="checkbox" value="@item.Ma.Trim()" class="checkboxCategory">
+                                    <label for="acces">@item.Ten<span>(@item.Sluong)</span></label>
+                                </li>
+
+                            }
+                        }
+
+
+                    </ul>
+                </div>
+            </div>
+            <!--layere categorie end-->
+            <!--color area start-->
+            <div class="sidebar_widget shop_c">
+                <div class="categorie__titile">
+                    <h4>Màu sắc</h4>
+                </div>
+                <div class="layere_categorie">
+                    <ul>
+                        @{
+                            var result1 = (from p in sp
+                                           group p by p.MauSac into count
+                                           select new
+                                           {
+                                               Ten = count.Key,
+                                               Sluong = count.Count()
+                                           });
+                            foreach (var item in result1)
+                            {
+                                <li>
+                                    <input id="acces" type="checkbox" value="@item.Ten.Trim()" class="checkboxColor">
+                                    <label for="acces">@item.Ten<span>(@item.Sluong)</span></label>
+                                </li>
+                            }
+                        }
+
+
+                    </ul>
+                </div>
+            </div>
+            <!--color area end-->
+            <!--price slider start-->
+            <div class="sidebar_widget price">
+                <h2>Giá</h2>
+                <div class="ca_search_filters">
+                    <input type="text" name="text" id="amount" />
+                    <div id="slider-range"></div>
+                </div>
+            </div>
+            <!--price slider end-->
+            <!--wishlist block start-->
+            <!--wishlist block end-->
+            <!--popular tags area-->
+            <div class="sidebar_widget tags  mb-30">
+                <div class="block_title">
+                    <h3>Thẻ phổ biến</h3>
+                </div>
+                <div class="block_tags">
+                    @{
+                        <a href="@Url.Action("Index", "SanPham", new {MaLoai = ViewBag.MaLoai.Trim() })">Tất cả</a>
+                        if (ViewBag.MaLoai != "")
+                        {
+                            WebsiteSellingSuitcasesEntities db = new WebsiteSellingSuitcasesEntities();
+                            string MaLoai = ViewBag.MaLoai;
+                            var resultTag = (from t in db.tDinhKems
+                                             from tp in db.tDinhKemSPs
+                                             from p in db.tDanhMucSPs
+                                             where (int)t.MaDK == (int)tp.MaDK && tp.MaSP == p.MaSP
+                                             && p.MaLoai.Contains(MaLoai)
+                                             select new
+                                             { MaDK = t.MaDK, TieuDe = t.TieuDe, MaLoai = p.MaLoai }).Distinct().ToList();
+
+                            foreach (var item in resultTag)
+                            {
+                                <a href="@Url.Action("Index", "SanPham", new { Tag = item.TieuDe, MaLoai = item.MaLoai.Trim() })">@item.TieuDe</a>
+                            }
+                        }
+                        else
+                        {
+                            @Html.Action("PopularTags", "LoaiSP")
+                        }
+
+                    }
+                </div>
+            </div>
+            <!--popular tags end-->
+            <!--newsletter block start-->
+            <div class="sidebar_widget newsletter mb-35">
+                <div class="block_title">
+                    <h3>Bản Tin</h3>
+                </div>
+                <form action="#">
+                    <p>Đăng ký nhận bản tin của bạn</p>
+                    <input placeholder="Your email address" type="text">
+                    <button type="submit">Đăng Ký</button>
+                </form>
+            </div>
+            <!--newsletter block end-->
+            <!--special product start-->
+
+            @Html.Action("PopularProducts", "LoaiSP")
+
+            <!--special product end-->
+
+
+        </div>
+        <div class="col-lg-9 col-md-12" id="FindProducts">
+            <!--banner slider start-->
+            <div class="banner_slider mb-35">
+                <img src="assets/img/banner/bannner10.jpg" alt="">
+            </div>
+            <!--banner slider start-->
+            <!--shop toolbar start-->
+            <div class="shop_toolbar mb-35">
+
+                <div class="list_button">
+                    <ul class="nav" role="tablist">
+                        <li>
+                            <a class="active" data-bs-toggle="tab" href="#large" role="tab" aria-controls="large" aria-selected="true"><i class="fa fa-th-large"></i></a>
+                        </li>
+                        <li>
+                            <a data-bs-toggle="tab" href="#list" role="tab" aria-controls="list" aria-selected="false"><i class="fa fa-th-list"></i></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="page_amount">
+                    <p>@ViewBag.Infor</p>
+                </div>
+
+                <div class="select_option">
+                        <label>Sắp xếp theo</label>
+                        <select name="orderby" id="short">
+                            <option  value="1">Mới</option>
+                            <option value="2">Lượt xem</option>
+                            <option value="3">Giá: Cao</option>
+                            <option  value="4">Giá: Thấp</option>
+                            <option value="5">Tên Sản Phẩm: A-Z</option>
+                            <option value="6">Tên Sản Phẩm: Z-A</option>
+                        </select>
+                </div>
+            </div>
+            <!--shop toolbar end-->
+            <!--shop tab product-->
+            <div class="shop_tab_product">
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="large" role="tabpanel">
+                        <div class="row">
+                            @{
+                                foreach (var item in Model)
+                                {
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="single_product">
+                                            <div class="product_thumb">
+                                                <a href="@Url.Action("Details", "SanPham", new { MaSP = item.MaSP.Trim() })"><img src="~/Images/@item.Anh" alt=""></a>
+                                                <div class="img_icone">
+                                                    @{ 
+                                                        if (item.LuotXem > 10)
+                                                        {
+                                                            <img src="~/assets/img/cart/span-hot.png" alt="">
+                                                        }
+                                                        else if (((TimeSpan)DateTime.Now.Subtract((DateTime)item.NgayTao)).TotalDays < 30)
+                                                        {
+                                                            <img src="~/assets/img/cart/span-new.png" alt="">
+                                                        }
+
+                                                    }
+
+                                                </div>
+                                                <div class="product_action">
+                                                    @using (Html.BeginForm("ThemGioHang", "GioHang", new { sMaSP = item.MaSP, strUrl = Request.Url.ToString(), SoLuong = 1 }))
+                                                    {
+                                                        <button type="submit" class="btn btn-info" style="color:white;width:100%"> <i class="fa fa-shopping-cart"></i> Thêm giỏ hàng</button>
+                                                    }
+                                                </div>
+                                            </div>
+                                            <div class="product_content">
+                                                @{
+                                                    double discount = (double)(item.GiaBan - item.GiaBan * item.ChietKhau);
+                                                }
+
+                                                <span class="product_price">@String.Format("{0:0,0 VNĐ}", discount)</span>
+                                                <h3 class="product_title"><a href="single-product.html">@item.TenSP</a></h3>
+                                            </div>
+                                            <div class="product_info">
+                                                <ul>
+                                                    <li>
+                                                        @using (Html.BeginForm("ThemYeuThich", "KhachHang", new { sMaSP = item.MaSP, strUrl = Request.Url.ToString() }))
+                                                        {
+
+                                                            <button type="submit" style="border:0px;background-color:white;"> <a>Thêm lượt thích</a></button>
+
+                                                        }
+                                                    </li>
+                                                    <li><a data-toggle="modal-ajax" data-target="#modalDetails" data-url="@Url.Action("DetailsPartial", "SanPham", new {MaSP = item.MaSP })" title="Quick view">Xem chi tiết</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+
+
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="list" role="tabpanel">
+                        @{
+                            foreach (var item in Model)
+                            {
+                                <div class="product_list_item mb-35">
+                                    <div class="row align-items-center">
+                                        <div class="col-lg-4 col-md-6 col-sm-6">
+                                            <div class="product_thumb">
+                                                <a href="@Url.Action("Details","SanPham",new {MaSP = item.MaSP })"><img src="~/Images/@item.Anh" alt=""></a>
+                                                <div class="hot_img">
+                                                    @{
+                                                        if (item.LuotXem > 10)
+                                                        {
+                                                            <img src="~/assets/img/cart/span-hot.png" alt="">
+                                                        }
+                                                        else if (((TimeSpan)DateTime.Now.Subtract((DateTime)item.NgayTao)).TotalDays < 30)
+                                                        {
+                                                            <img src="~/assets/img/cart/span-new.png" alt="">
+                                                        }
+
+                                                    }
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8 col-md-6 col-sm-6">
+                                            <div class="list_product_content">
+                                                <div class="product_ratting">
+                                                    <ul>
+                                                        <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="list_title">
+                                                    <h3><a href="single-product.html">@item.TenSP</a></h3>
+                                                </div>
+                                                <p class="design">@item.GioiThieuSP</p>
+
+                                                <p class="compare">
+                                                    <input id="select" type="checkbox">
+                                                    <label for="select">Select to compare</label>
+                                                </p>
+                                                @{
+
+                                                    double discount = (double)(item.GiaBan - item.GiaBan * item.ChietKhau);
+                                                    double price = (double)(item.GiaBan);
+
+                                                }
+                                                <div class="content_price">
+                                                    <span>@String.Format("{0:0,0 VNĐ}", discount)</span>
+                                                    <span class="old-price">@String.Format("{0:0,0 VNĐ}", price)</span>
+                                                </div>
+                                                <div class="add_links">
+                                                    <ul>
+                                                        <li>
+
+                                                            @using (Html.BeginForm("ThemGioHang", "GioHang", new { sMaSP = item.MaSP, strUrl = Request.Url.ToString(), SoLuong = 1 }))
+                                                            {
+                                                                <button type="submit" style=" border: 0px ;width: 30px; height: 30px; background: #00bba6; display: block; font-size: 16px; text-align: center; line-height: 32px; color: #fff; border-radius: 50%;"> <i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
+                                                            }
+                                                        </li>
+                                                        <li>
+                                                        @using (Html.BeginForm("ThemYeuThich", "KhachHang", new { sMaSP = item.MaSP, strUrl = Request.Url.ToString() }))
+                                                        {
+
+                                                            <button type="submit" style=" border: 0px ;width: 30px; height: 30px; background: #00bba6; display: block; font-size: 16px; text-align: center; line-height: 32px; color: #fff; border-radius: 50%;"> <i class="fa fa-heart" aria-hidden="true"></i></button>
+
+                                                        }
+                                                        </li>
+                                                        <li><a data-toggle="modal-ajax" data-target="#modalDetails" data-url="@Url.Action("DetailsPartial", "SanPham", new {MaSP = item.MaSP })" title="Quick view"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+
+
+
+                    </div>
+
+                </div>
+            </div>
+            <!--shop tab product end-->
+            <!--pagination style start-->
+            <div class="pagination_style">
+                <div class="item_page">
+                    <form action="#">
+                        <label for="page_select">Hiện</label>
+                        <select id="page_select">
+                            <option value="1">6</option>
+                        </select>
+                        <span>Sản phẩm theo trang</span>
+                    </form>
+                </div>
+                <div class="page_number">
+                    <span>Trang: </span>
+                    @*      <ul>
+                            <li>«</li>
+                            <li class="current_number">1</li>
+                            <li><a href="#">2</a></li>
+                            <li>»</li>
+                        </ul>*@
+                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page, MaLoai = ViewBag.MaLoai, MaDT = ViewBag.MaDT, MauSac = ViewBag.MauSac, Tag = ViewBag.Tag,SapXep=ViewBag.SapXep}))
+                </div>
+            </div>
+            <!--pagination style end-->
+        </div>
+    </div>
+</div>
+<!--pos home section end-->
+
+<script charset="utf-8">
+    $(document).ready(function () {
+        loadCategory();
+        $('#amount').val("@ViewBag.Gia" == "" ? "0 VNĐ - 20000000 VNĐ" :@Html.Raw(Json.Encode(@ViewBag.Gia)))
+
+        $(".checkboxCategory").on("click", function () {
+            countChecked('.checkboxCategory', '&MaDT=', '&MaDT='+@Html.Raw(Json.Encode(@ViewBag.MaDT)));
+        });
+        $(".checkboxColor").on("click", function () {
+            countChecked('.checkboxColor', '&MauSac=', '&MauSac='+@Html.Raw(Json.Encode(@ViewBag.MauSac)));
+        });
+
+
+        $("#slider-range").on('click', function () {
+            window.location = getURL("&Gia=", $('#amount').val(), ("&Gia=" +@Html.Raw(Json.Encode(@ViewBag.Gia))).length);
+        })
+        $('#short').on('change', function () {
+            window.location = getURL("&SapXep=", $(this).val(), ("&SapXep=" +@Html.Raw(Json.Encode(@ViewBag.SapXep))).length);
+        })
+
+
+
+    });
+
+    function countChecked(id, s, viewbag) {
+        var result = "";
+         $( id + ":checked").each(function (index, value) {
+             result += $(this).val().trim()+",";
+
+         });
+        window.location = getURL( s , result,  viewbag.length);
+    };
+    function loadCategory() {
+
+          if ("@ViewBag.MaDT" != "") {
+                var dataCategory = "@ViewBag.MaDT".split(',');
+                for (i = 0; i < dataCategory.length; i++) {
+                    if (dataCategory[i] == "") break;
+                    $('.checkboxCategory[value= ' + dataCategory[i] + ']').prop('checked', true);
+                }
+            }
+            if ("@ViewBag.MauSac" != "") {
+                var dataCategory = (@Html.Raw(Json.Encode(@ViewBag.MauSac))).split(',');
+
+                for (i = 0; i < dataCategory.length; i++) {
+                    if (dataCategory[i] == "") break;
+                    $('.checkboxColor[value= "' + dataCategory[i] + '"]').prop('checked', true);
+                }
+            }
+        if ("@ViewBag.SapXep" != "") {
+       
+            var dataCategory = @Html.Raw(Json.Encode(@ViewBag.SapXep));
+            $('#short option[value= "' + dataCategory + '"]').attr('selected', true);
+            $('.list li')
+                .attr('class', 'option')
+                .filter('[data-value= "' + dataCategory + '"]')
+                .attr('class', 'option selected');
+            $('.nice-select span').text($('#short option[value= "' + dataCategory + '"]').text());
+                
+            }
+    }
+    function getURL(s, re, length) {
+        var href = returnPage(decodeURIComponent(window.location.href));
+        var result = '';
+
+        if (!href.includes(s)) {
+
+            result = href + s + re;
+        }
+        else {
+            result = href.replace(href.substring(href.indexOf(s), href.indexOf(s) + length), s + re);
+            if (re == "") result = href.replace(href.substring(href.indexOf(s), href.indexOf(s) + length), "");
+        }
+
+        return result;
+    }
+    function returnPage(s) {
+        var href = s;
+        var page = @Html.Raw(Json.Encode(ViewBag.Page));
+        if (page != 1) {
+            return href.replaceAll('page=' + page,'')
+        }
+  
+        return href;
+    }
+
+</script>

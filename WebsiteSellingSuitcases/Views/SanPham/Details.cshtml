@@ -1,0 +1,441 @@
+﻿
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutSP.cshtml";
+}
+@model WebsiteSellingSuitcases.Models.tDanhMucSP
+@using WebsiteSellingSuitcases.Models
+@using System.Threading;
+@using System.Globalization;
+<!--breadcrumbs area start-->
+<div class="breadcrumbs_area">
+    <div class="row">
+        <div class="col-12">
+            <div class="breadcrumb_content">
+                <ul>
+                    <li><a href="index.html">@Model.tLoaiSP.Loai</a></li>
+                    <li><i class="fa fa-angle-right"></i></li>
+                    <li>@Model.TenSP</li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--breadcrumbs area end-->
+<!--product wrapper start-->
+<div class="product_details">
+    <div class="row">
+        <div class="col-lg-5 col-md-6">
+            <div class="product_tab fix">
+                <div class="product_tab_button" style="overflow: auto;height: 425px;">
+                    <ul class="nav" role="tablist">
+                        @{
+                            for (int i = 0; i < Model.tAnhSPs.Count; i++)
+                            {
+                                <li>
+                                    <a data-bs-toggle="tab" href="#p_tab@(i + 1)" role="tab" aria-controls="p_tab@(i + 1)" aria-selected="false"><img src="~/Images/@Model.tAnhSPs.ToArray()[i].TenFileAnh" alt=""></a>
+                                </li>
+                            }
+                        }
+
+
+                    </ul>
+                </div>
+                <div class="tab-content produc_tab_c">
+                    <div class="tab-pane fade show active" id="p_tab1" role="tabpanel">
+                        <div class="modal_img">
+                            <a href="#"><img src="~/Images/@Model.Anh" alt=""></a>
+                            <div class="img_icone">
+                                @{
+                                    if (Model.LuotXem > 10)
+                                    {
+                                        <img src="~/assets/img/cart/span-hot.png" alt="">
+                                    }
+                                    else if (((TimeSpan)DateTime.Now.Subtract((DateTime)Model.NgayTao)).TotalDays < 30)
+                                    {
+                                        <img src="~/assets/img/cart/span-new.png" alt="">
+
+                                    }
+
+                                }
+                            </div>
+                            <div class="view_img">
+                                <a class="large_view" href="~/Images/@Model.Anh"><i class="fa fa-search-plus"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    @{
+                        for (int i = 0; i < Model.tAnhSPs.Count; i++)
+                        {
+                            <div class="tab-pane fade" id="p_tab@(i + 1)" role="tabpanel">
+                                <div class="modal_img">
+                                    <a href="#"><img src="~/Images/@Model.tAnhSPs.ToArray()[i].TenFileAnh" alt=""></a>
+                                    <div class="img_icone">
+                                        @{
+                                            if (Model.LuotXem > 10)
+                                            {
+                                                <img src="~/assets/img/cart/span-hot.png" alt="">
+                                            }
+                                            else if (((TimeSpan)DateTime.Now.Subtract((DateTime)Model.NgayTao)).TotalDays < 30)
+                                            {
+                                                <img src="~/assets/img/cart/span-new.png" alt="">
+
+                                            }
+                                        }
+                                    </div>
+                                    <div class="view_img">
+                                        <a class="large_view" href="~/Images/@Model.tAnhSPs.ToArray()[i].TenFileAnh"><i class="fa fa-search-plus"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+
+
+                </div>
+
+            </div>
+        </div>
+        <div class="col-lg-7 col-md-6">
+            <div class="product_d_right">
+                <h1>@Model.TenSP</h1>
+                <div class="product_ratting mb-10">
+                    <ul>
+                        <li><a href="#"><i class="fa fa-star"></i></a></li>
+                        <li><a href="#"><i class="fa fa-star"></i></a></li>
+                        <li><a href="#"><i class="fa fa-star"></i></a></li>
+                        <li><a href="#"><i class="fa fa-star"></i></a></li>
+                        <li><a href="#"><i class="fa fa-star"></i></a></li>
+                        <li><a href="#re"> Viết nhận xét </a></li>
+                    </ul>
+                </div>
+                <div class="product_desc">
+                    <p>@Model.GioiThieuSP</p>
+                </div>
+
+                <div class="content_price mb-15">
+                    @{
+
+                        double discount = (double)(Model.GiaBan - Model.GiaBan * Model.ChietKhau);
+                        double price = (double)(Model.GiaBan);
+
+                    }
+                    <span>@String.Format("{0:0,0 VNĐ}", discount)</span>
+                    <span class="old-price">@String.Format("{0:0,0 VNĐ}", price)</span>
+
+
+                </div>
+                <div class="box_quantity mb-20">
+                    @using (Html.BeginForm("ThemGioHang", "GioHang", new { sMaSP = Model.MaSP, strUrl = Request.Url.ToString() }))
+                    {
+                        <label>Số lượng</label>
+                        <input min="0" max="100" value="1" type="number" name="SoLuong">
+                        <button type="submit"><i class="fa fa-shopping-cart"></i> Thêm giỏ hàng</button>
+                    }
+                    @using (Html.BeginForm("ThemYeuThich", "KhachHang", new { sMaSP = Model.MaSP, strUrl = Request.Url.ToString() }))
+                    {
+
+                        <button type="submit" style="width: 30px; height: 30px; background: #00bba6; display: block; font-size: 16px; text-align: center; line-height: 32px; color: #fff; border-radius: 50%; margin-left: 20px;  "> <i style="margin-left:-8px" class="fa fa-heart" aria-hidden="true"></i></button>
+
+                    }
+                </div>
+                <div class="product_d_size mb-20">
+                    <label for="group_1">Kích thước</label>
+                    <select name="size" id="group_1">
+                        <option value="1">@Model.tKichThuoc.KichThuoc</option>
+                    </select>
+                </div>
+
+                <div class="sidebar_widget color">
+                    <h2>Bảo hành: <span style="color:red">@Model.ThoiGianBaoHanh năm</span></h2>
+                </div>
+
+                <div class="product_stock mb-20">
+                    <p>@Model.SoLuong sản phẩm</p>
+                    <span> Trong kho </span>
+                </div>
+                <div class="wishlist-share">
+                    <h4>Share on:</h4>
+                    <ul>
+                        <li><a href="#"><i class="fa fa-rss"></i></a></li>
+                        <li><a href="#"><i class="fa fa-vimeo"></i></a></li>
+                        <li><a href="#"><i class="fa fa-tumblr"></i></a></li>
+                        <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--product details end-->
+<!--product info start-->
+<div class="product_d_info">
+    <div class="row">
+        <div class="col-12">
+            <div class="product_d_inner">
+                <div class="product_info_button">
+                    <ul class="nav" role="tablist">
+                        <li>
+                            <a class="active" data-bs-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="false">Thêm thông tin</a>
+                        </li>
+                        <li>
+                            <a data-bs-toggle="tab" href="#sheet" role="tab" aria-controls="sheet" aria-selected="false">Bảng dữ liệu</a>
+                        </li>
+                        <li id="re">
+                            <a data-bs-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">Nhận xét</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="info" role="tabpanel">
+                        <div class="product_info_content">
+                            <p>Thời trang đã tạo ra những bộ sưu tập được thiết kế đẹp mắt kể từ năm 2010. Thương hiệu cung cấp những thiết kế nữ tính mang đến những chiếc vali thời trang và những chiếc vali thời trang, từ đó đã phát triển thành một bộ sưu tập ready-to-wear đầy đủ, trong đó mọi món đồ đều là một phần quan trọng trong tủ quần áo của phụ nữ. Kết quả? Vẻ ngoài sành điệu, dễ dàng, sang trọng với sự thanh lịch trẻ trung và phong cách đặc trưng không thể nhầm lẫn. Tất cả các tác phẩm tuyệt đẹp được sản xuất tại Ý và được sản xuất với sự chú ý lớn nhất. Giờ đây, Thời trang mở rộng sang một loạt các phụ kiện bao gồm giày, mũ, thắt lưng và hơn thế nữa!</p>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="sheet" role="tabpanel">
+                        <div class="product_d_table">
+                            <form action="#">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td class="first_child">Chất Liệu</td>
+                                            <td>@Model.tChatLieu.ChatLieu</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="first_child">Model</td>
+                                            <td>@Model.tLoaiDT.TenLoai</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="first_child">Hãng Sản Xuất</td>
+                                            <td>@Model.tHangSX.HangSX</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="first_child">Nước Sản Xuất</td>
+                                            <td>@Model.tQuocGia.TenNuoc</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="first_child">Cân Nặng</td>
+                                            <td>@Model.CanNang kg</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="first_child">Độ Nới</td>
+                                            <td>@Model.DoNoi</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="first_child">Màu Sắc</td>
+                                            <td>@Model.MauSac</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="first_child">Ngăn Laptop</td>
+                                            <td>@Model.NganLapTop</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </form>
+                        </div>
+                        <div class="product_info_content">
+                            <p>Thời trang đã tạo ra những bộ sưu tập được thiết kế đẹp mắt kể từ năm 2010. Thương hiệu cung cấp những thiết kế nữ tính mang đến những chiếc vali thời trang và những chiếc vali thời trang, từ đó đã phát triển thành một bộ sưu tập ready-to-wear đầy đủ, trong đó mọi món đồ đều là một phần quan trọng trong tủ quần áo của phụ nữ. Kết quả? Vẻ ngoài sành điệu, dễ dàng, sang trọng với sự thanh lịch trẻ trung và phong cách đặc trưng không thể nhầm lẫn. Tất cả các tác phẩm tuyệt đẹp được sản xuất tại Ý và được sản xuất với sự chú ý lớn nhất. Giờ đây, Thời trang mở rộng sang một loạt các phụ kiện bao gồm giày, mũ, thắt lưng và hơn thế nữa!</p>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="reviews" role="tabpanel">
+                        <div class="product_info_content">
+                            <p>Thời trang đã tạo ra những bộ sưu tập được thiết kế đẹp mắt kể từ năm 2010. Thương hiệu cung cấp những thiết kế nữ tính mang đến những chiếc vali thời trang và những chiếc vali thời trang, từ đó đã phát triển thành một bộ sưu tập ready-to-wear đầy đủ, trong đó mọi món đồ đều là một phần quan trọng trong tủ quần áo của phụ nữ. Kết quả? Vẻ ngoài sành điệu, dễ dàng, sang trọng với sự thanh lịch trẻ trung và phong cách đặc trưng không thể nhầm lẫn. Tất cả các tác phẩm tuyệt đẹp được sản xuất tại Ý và được sản xuất với sự chú ý lớn nhất. Giờ đây, Thời trang mở rộng sang một loạt các phụ kiện bao gồm giày, mũ, thắt lưng và hơn thế nữa!</p>
+                        </div>
+                        @{
+                            foreach (var item in Model.Reviews)
+                            {
+                                <div class="product_info_inner">
+
+                                    <div class="product_ratting mb-10">
+                                        <ul>
+                                            <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                        </ul>
+                                        <strong>Thời gian</strong>
+                                        @{
+                                            Thread.CurrentThread.CurrentCulture = new CultureInfo("vi-VN");
+                                            string date = ((DateTime)item.ThoiGian).ToString("dddd dd/MM/yyy HH':'mm':'ss");
+
+                                        }
+                                        <p>@date</p>
+                                    </div>
+                                    <div class="product_demo">
+                                        <strong>@item.HoTen</strong>
+                                        <p>@item.NoiDung</p>
+                                    </div>
+                                </div>
+                            }
+                        }
+
+                        <div class="product_review_form">
+                            @using (Html.BeginForm("SubmitReview", "SanPham", new { MaSP = Model.MaSP }, FormMethod.Post))
+                            {
+                                <h2>THÊM MỘT BÀI ĐÁNH GIÁ</h2>
+                                <p>Địa chỉ email của bạn sẽ không được công bố. Các trường bắt buộc được đánh dấu </p>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label for="review_comment">Nhận xét của bạn</label>
+                                        <textarea name="comment" id="review_comment" required=""></textarea>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <label for="author">Họ Tên</label>
+                                        <input id="author" name="author" type="text" required="">
+
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <label for="email">Email </label>
+                                        <input id="email" name="email" type="text" required="">
+                                    </div>
+                                </div>
+                                <button type="submit">Submit</button>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--product info end-->
+<!--new product area start-->
+<div class="new_product_area product_page">
+    <div class="row">
+        <div class="col-12">
+            <div class="block_title">
+                <h3>  10 SẢN PHẨM KHÁC:</h3>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="single_p_active owl-carousel">
+            @{
+                WebsiteSellingSuitcasesEntities db = new WebsiteSellingSuitcasesEntities();
+                var PRODUCTS_CATEGORY = db.tDanhMucSPs.Where(n => n.MaLoai != Model.MaLoai).OrderBy(x => Guid.NewGuid()).Take(11).ToArray();
+                for (int item = 0; item < PRODUCTS_CATEGORY.Length; item++)
+                {
+                    <div class="col-lg-3">
+                        <div class="single_product">
+                            <div class="product_thumb">
+                                <a href="@Url.Action("Details","SanPham",new {MaSP = PRODUCTS_CATEGORY[item].MaSP})"><img src="~/Images/@PRODUCTS_CATEGORY[item].Anh" alt=""></a>
+                                <div class="img_icone">
+                                    @{
+
+                                        if (PRODUCTS_CATEGORY[item].LuotXem > 10)
+                                        {
+                                            <img src="~/assets/img/cart/span-hot.png" alt="">
+                                        }
+                                        else if (((TimeSpan)DateTime.Now.Subtract((DateTime)PRODUCTS_CATEGORY[item].NgayTao)).TotalDays < 30)
+                                        {
+                                            <img src="~/assets/img/cart/span-new.png" alt="">
+
+                                        }
+                                    }
+                                </div>
+                                <div class="product_action">
+                                    <a href="#"> <i class="fa fa-shopping-cart"></i> Thêm giỏ hàng</a>
+                                </div>
+                            </div>
+                            <div class="product_content">
+                                @{
+                                    double discountPRODUCTS_CATEGORY = (double)(PRODUCTS_CATEGORY[item].GiaBan - PRODUCTS_CATEGORY[item].GiaBan * PRODUCTS_CATEGORY[item].ChietKhau);
+                                }
+                                <span class="product_price">@String.Format("{0:0,0 VNĐ}", discountPRODUCTS_CATEGORY)</span>
+                                <h3 class="product_title"><a href="single-product.html">@PRODUCTS_CATEGORY[item].TenSP</a></h3>
+                            </div>
+                            <div class="product_info">
+                                <ul>
+                                    <li>
+                                        @using (Html.BeginForm("ThemYeuThich", "KhachHang", new { sMaSP = PRODUCTS_CATEGORY[item].MaSP, strUrl = Request.Url.ToString() }))
+                                        {
+
+                                            <button type="submit" style="border:0px;background-color:white;"> <a>Thêm lượt thích</a></button>
+
+                                        }
+                                    </li>
+                                    <li><a data-toggle="modal-ajax" data-target="#modalDetails" data-url="@Url.Action("DetailsPartial", "SanPham", new {MaSP = PRODUCTS_CATEGORY[item].MaSP })" title="Quick view">Xem chi tiết</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+
+
+        </div>
+    </div>
+</div>
+<!--new product area start-->
+<!--new product area start-->
+<div class="new_product_area product_page">
+    <div class="row">
+        <div class="col-12">
+            <div class="block_title">
+                <h3>    NHỮNG SẢM PHẨM TƯƠNG TỰ</h3>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="single_p_active owl-carousel">
+            @{
+                var RELATED_PRODUCTS = db.tDanhMucSPs.Where(n => n.MaLoai == Model.MaLoai && n.MaSP != Model.MaSP).OrderBy(x => Guid.NewGuid()).Take(10).ToArray();
+                for (int item = 0; item < RELATED_PRODUCTS.Length; item++)
+                {
+                    <div class="col-lg-3">
+                        <div class="single_product">
+                            <div class="product_thumb">
+                                <a href="@Url.Action("Details","SanPham",new {MaSP = RELATED_PRODUCTS[item].MaSP})"><img src="~/Images/@RELATED_PRODUCTS[item].Anh" alt=""></a>
+                                <div class="img_icone">
+                                    @{
+                                        if (RELATED_PRODUCTS[item].LuotXem > 10)
+                                        {
+                                            <img src="~/assets/img/cart/span-hot.png" alt="">
+                                        }
+                                        else if (((TimeSpan)DateTime.Now.Subtract((DateTime)RELATED_PRODUCTS[item].NgayTao)).TotalDays < 30)
+                                        {
+                                            <img src="~/assets/img/cart/span-new.png" alt="">
+
+                                        }
+
+                                    }
+                                </div>
+                                <div class="product_action">
+                                    <a href="#"> <i class="fa fa-shopping-cart"></i> Thêm giỏ hàng</a>
+                                </div>
+                            </div>
+                            <div class="product_content">
+                                @{
+                                    double discountRELATED_PRODUCTS = (double)(RELATED_PRODUCTS[item].GiaBan - RELATED_PRODUCTS[item].GiaBan * RELATED_PRODUCTS[item].ChietKhau);
+                                }
+                                <span class="product_price">@String.Format("{0:0,0 VNĐ}", discountRELATED_PRODUCTS)</span>
+                                <h3 class="product_title"><a href="single-product.html">@RELATED_PRODUCTS[item].TenSP</a></h3>
+                            </div>
+                            <div class="product_info">
+                                <ul>
+                                    <li>
+                                        @using (Html.BeginForm("ThemYeuThich", "KhachHang", new { sMaSP = RELATED_PRODUCTS[item].MaSP, strUrl = Request.Url.ToString() }))
+                                        {
+
+                                            <button type="submit" style="border:0px;background-color:white;"> <a>Thêm lượt thích</a></button>
+
+                                        }
+                                    </li>
+                                    <li><a data-toggle="modal-ajax" data-target="#modalDetails" data-url="@Url.Action("DetailsPartial", "SanPham", new {MaSP = RELATED_PRODUCTS[item].MaSP })" title="Quick view">Xem chi tiết</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+
+        </div>
+    </div>
+</div>
+<!--new product area start-->

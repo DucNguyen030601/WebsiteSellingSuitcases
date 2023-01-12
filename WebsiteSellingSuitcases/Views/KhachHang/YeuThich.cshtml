@@ -1,0 +1,43 @@
+﻿@model List<WebsiteSellingSuitcases.Models.tDanhMucSP>
+<div class="coron_table table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Xoá</th>
+                <th width="150px">Ảnh</th>
+                <th>Sản Phẩm</th>
+                <th>Giá</th>
+                <th>Chiết Khấu</th>
+                <th>Tình trạng</th>
+                <th>Thêm giỏ hàng</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                        @using (Html.BeginForm("XoaYeuThich", "KhachHang", new { sMaSP = item.MaSP, strUrl = Request.Url.ToString() }))
+                        {
+                            <button type="submit" style="background-color:white;border:0px"> <a style="color: forestgreen; text-decoration: underline">X</a></button>
+                        }
+                            </td>
+                            <td><a><img src="~/Images/@item.Anh" alt="" width="50%"></a></td>
+                            <td><a href="@Url.Action("Details", "SanPham", new {MaSP=item.MaSP})">@item.TenSP</a></td>
+                            <td>@String.Format("{0:0,0 VNĐ}", item.GiaBan)</td>
+                            <td>@(item.ChietKhau*100)%</td>
+                            <td>Còn @item.SoLuong sản phẩm</td>
+                            <td>
+                                @using (Html.BeginForm("ThemGioHang", "GioHang", new { sMaSP =item.MaSP, strUrl = Request.Url.ToString(), SoLuong = 1 }))
+                                { 
+                                <button type="submit" style="background-color:white;border:0px"> <a style="color: red; text-decoration: underline">Thêm</a></button>
+                                }
+
+                            </td>
+                        </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

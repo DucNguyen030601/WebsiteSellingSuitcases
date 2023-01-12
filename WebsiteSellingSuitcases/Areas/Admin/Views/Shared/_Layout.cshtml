@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("QLy Web Bán Vali", "Index", "TrangChu", new { area = "Admin" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Sản Phẩm", "Index", "SanPham")</li>
+                    <li>@Html.ActionLink("Khách Hàng", "Index", "KhachHang")</li>
+                    <li>@Html.ActionLink("Nhân Viên", "Index", "NhanVien")</li>
+                    <li>@Html.ActionLink("Blog", "Index", "Blog")</li>
+                    <li><a href="@Url.Action("Index", "HoaDon")"><i style='font-size:15px;color:white' class='fas fa-file-invoice'></i> Hoá Đơn Bán</a></li>
+                    @Html.Action("DuyetHoaDonPartial", "DuyetHoaDon")
+                    <li><a href="@Url.Action("HoaDonNhap", "HoaDon")"><i style='font-size:15px;color:white' class='fas fa-file-invoice-dollar'></i> Hoá Đơn Nhập</a></li>
+                    <li><a href="@Url.Action("Index", "DoanhThu")"><i style='font-size:15px;color:white' class='fas fa-chart-line'></i> Doanh Thu</a></li>
+                    @Html.Action("GioHangPartial", "GioHang")
+                    <li>@Html.ActionLink("Đăng Xuất", "Index", "DangNhap")</li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="PlaceHolderHere"></div>
+    <div class="container-fluid" >
+
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+<script src="~/assets/js/url/js.js"></script>
+</body>
+</html>
+

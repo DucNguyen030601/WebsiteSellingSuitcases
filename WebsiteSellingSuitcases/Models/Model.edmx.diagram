@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="825d06b345804c30abce9152c46f7222" Name="Diagram1" ZoomLevel="57">
+        <EntityTypeShape EntityType="WebsiteSellingSuitcases.Review" Width="1.5" PointX="7.5" PointY="14" />
+        <EntityTypeShape EntityType="WebsiteSellingSuitcases.tADMIN" Width="1.5" PointX="0.75" PointY="2" />
+        <EntityTypeShape EntityType="WebsiteSellingSuitcases.tAnhSP" Width="1.5" PointX="7.5" PointY="26.75" />
+        <EntityTypeShape EntityType="WebsiteSellingSuitcases.tChatLieu" Width="1.5" PointX="3" PointY="22.125" />
+        <EntityTypeShape EntityType="WebsiteSellingSuitcases.tChiTietHoaDon" Width="1.5" PointX="10.5" PointY="14.125" />
+        <EntityTypeShape EntityType="WebsiteSellingSuitcases.tDanhMucSP" Width="1.5" PointX="5.25" PointY="11.75" />
+        <EntityTypeShape EntityType="WebsiteSellingSuitcases.tDinhKem" Width="1.5" PointX="8.25" PointY="11.625" />
+        <EntityTypeShape EntityType="WebsiteSellingSuitcases.tDinhKemSP" Width="1.5" PointX="10.5" PointY="11.375" />
+        <EntityTypeShape EntityType="WebsiteSellingSuitcases.tHangSX" Width="1.5" PointX="3" PointY="18.375" />
+        <EntityTypeShape EntityType="WebsiteSellingSuitcases.tKhachHang" Width="1.5" PointX="6" PointY="20.375" />
+        <EntityTypeShape EntityType="WebsiteSellingSuitcases.tKichThuoc" Width="1.5" PointX="3" PointY="11.125" />
+        <EntityTypeShape EntityType="WebsiteSellingSuitcases.tLoaiBlog" Width="1.5" PointX="3" PointY="7.625" />
+        <EntityTypeShape EntityType="WebsiteSellingSuitcases.tLoaiDT" Width="1.5" PointX="3" PointY="15.75" />
+        <EntityTypeShape EntityType="WebsiteSellingSuitcases.tLoaiSP" Width="1.5" PointX="3" PointY="13.5" />
+        <EntityTypeShape EntityType="WebsiteSellingSuitcases.tNhanVien" Width="1.5" PointX="6" PointY="2.875" />
+        <EntityTypeShape EntityType="WebsiteSellingSuitcases.tQuocGia" Width="1.5" PointX="0.75" PointY="10.375" />
+        <EntityTypeShape EntityType="WebsiteSellingSuitcases.tYeuThich" Width="1.5" PointX="10.5" PointY="17.375" />
+        <AssociationConnector Association="WebsiteSellingSuitcases.FK_Reviews_tDanhMucSP" />
+        <AssociationConnector Association="WebsiteSellingSuitcases.FK_tAnhSP_tDanhMucSP" />
+        <AssociationConnector Association="WebsiteSellingSuitcases.FK_tDanhMucSP_tChatLieu" />
+        <AssociationConnector Association="WebsiteSellingSuitcases.FK_tChiTietHoaDon_tDanhMucSP" />
+        <AssociationConnector Association="WebsiteSellingSuitcases.FK_tDanhMucSP_tHangSX" />
+        <AssociationConnector Association="WebsiteSellingSuitcases.FK_tDanhMucSP_tKichThuoc" />
+        <AssociationConnector Association="WebsiteSellingSuitcases.FK_tDanhMucSP_tLoaiDT" />
+        <AssociationConnector Association="WebsiteSellingSuitcases.FK_tDanhMucSP_tLoaiSP" />
+        <AssociationConnector Association="WebsiteSellingSuitcases.FK_tDanhMucSP_tQuocGia" />
+        <AssociationConnector Association="WebsiteSellingSuitcases.FK_tDinhKemSanPham_tDanhMucSP" />
+        <AssociationConnector Association="WebsiteSellingSuitcases.FK_tYeuThich_tDanhMucSP" />
+        <AssociationConnector Association="WebsiteSellingSuitcases.FK_tDinhKemSanPham_tDinhKem" />
+        <AssociationConnector Association="WebsiteSellingSuitcases.FK_tHangSX_tQuocGia" />
+        <AssociationConnector Association="WebsiteSellingSuitcases.FK_tYeuThich_tKhachHang" />
+        <EntityTypeShape EntityType="WebsiteSellingSuitcases.tBlog" Width="1.5" PointX="8.25" PointY="5.5" />
+        <AssociationConnector Association="WebsiteSellingSuitcases.FK_Reviews_tBog" />
+        <AssociationConnector Association="WebsiteSellingSuitcases.FK_tBog_tLoaiBlog" />
+        <AssociationConnector Association="WebsiteSellingSuitcases.FK_tBog_tNhanVien" />
+        <EntityTypeShape EntityType="WebsiteSellingSuitcases.tLienHe" Width="1.5" PointX="5.375" PointY="6.75" />
+        <EntityTypeShape EntityType="WebsiteSellingSuitcases.tHoaDon" Width="1.5" PointX="13.25" PointY="11.5" />
+        <AssociationConnector Association="WebsiteSellingSuitcases.FK_tChiTietHoaDon_tHoaDonBan" />
+        <AssociationConnector Association="WebsiteSellingSuitcases.FK_tHoaDonBan_tKhachHang" />
+        <AssociationConnector Association="WebsiteSellingSuitcases.FK_tHoaDonBan_tNhanVien" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

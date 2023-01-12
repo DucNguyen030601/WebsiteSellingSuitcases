@@ -1,0 +1,110 @@
+﻿
+@{
+    ViewBag.Title = "ThuTucThanhToan";
+    Layout = "~/Views/Shared/_LayoutSP.cshtml";
+}
+@model WebsiteSellingSuitcases.Models.tKhachHang
+@using WebsiteSellingSuitcases.Models;
+<!--breadcrumbs area start-->
+<div class="breadcrumbs_area">
+    <div class="row">
+        <div class="col-12">
+            <div class="breadcrumb_content">
+                <ul>
+                    <li><a href="/Home">Trang chủ</a></li>
+                    <li><i class="fa fa-angle-right"></i></li>
+                    <li>Thủ tục thanh toán</li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--breadcrumbs area end-->
+<!--Checkout page section-->
+<div class="Checkout_section">
+    <div class="checkout_form">
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+
+                <h3>CHI TIẾT THANH TOÁN</h3>
+                <div class="row">
+
+                    <div class="col-lg-6 mb-30">
+                        <label>Họ tên </label>
+                        <input type="text" value="@Model.TenKH" disabled>
+                    </div>
+
+                    <div class="col-12 mb-30">
+                        <label>Địa chỉ</label>
+                        <input type="text" value="@Url.Content(Model.DiaChi+", "+Model.Huyen+", "+Model.ThanhPho)" disabled>
+                    </div>
+                    <div class="col-lg-6 mb-30">
+                        <label>Điện thoại</label>
+                        <input type="text" value="@Model.DienThoai" disabled>
+
+                    </div>
+                    <div class="col-lg-6 mb-30">
+                        <label> Email   </label>
+                        <input type="text" value="@Model.Email" disabled>
+                    </div>
+                </div>
+                <div class="col-12 mb-30">
+                    <p style="color:red">Nếu bạn muốn chỉnh sửa thông tin chuyển hướng đến...</p>
+                    <a class="btn btn-danger" href="/KhachHang">Tài khoản của tôi</a>
+                </div>
+
+            </div>
+            <div class="col-lg-6 col-md-6">
+                
+                    <h3>ĐƠN ĐẶT HÀNG CỦA BẠN</h3>
+                    <div class="order_table table-responsive mb-30">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Sản Phẩm</th>
+                                    <th>Toàn Bộ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{ 
+                                    List<GioHang> collection = ViewBag.GioHang;
+                                    foreach (var item in collection)
+                                    {
+                                                                <tr>
+                                                                    <td> @item.sTenSP <strong> × @item.iSoLuong</strong></td>
+                                                                    <td> @String.Format("{0:0,0 VNĐ}",item.dThanhTien)</td>
+                                                                </tr>
+                                    }
+                                }
+   
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Tổng phụ giỏ hàng</th>
+                                    <td>@String.Format("{0:0,0 VNĐ}", ViewBag.TongTien - ViewBag.PhiShip)</td>
+                                </tr>
+                                <tr>
+                                    <th>Phí Ship</th>
+                                    <td><strong>@String.Format("{0:0,0 VNĐ}", ViewBag.PhiShip)</strong></td>
+                                </tr>
+                                <tr class="order_total">
+                                    <th>Tổng đơn đặt hàng</th>
+                                    <td><strong>@String.Format("{0:0,0 VNĐ}", ViewBag.TongTien)</strong></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                @using (Html.BeginForm("DatHang", "GioHang", FormMethod.Post))
+                {
+                    <div class="payment_method">
+                        <div class="order_button">
+                            <button type="submit">Đặt Hàng</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<!--Checkout page section end-->

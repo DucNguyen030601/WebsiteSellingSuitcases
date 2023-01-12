@@ -1,0 +1,22 @@
+﻿@model WebsiteSellingSuitcases.Models.tNhanVien
+<div class="modal fade" id="modalDetailsAdmin">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Chi tiết nhân viên</h4>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>X</span>
+                </button>
+            </div>
+            <div class="modal_body">
+                <p><strong style="color:blue"> - Mã nhân viên: </strong>@Model.MaNV</p>
+                <p><strong style="color:blue"> - Tên nhân viên: </strong>@Model.TenNV</p>
+                <p><strong style="color:blue"> - Giới tính: </strong> @(Model.GioiTinh==true?"Nam":"Nữ")</p>
+                <p><strong style="color:blue"> - Địa chỉ: </strong>@Model.DiaChi</p>
+                <p><strong style="color:blue"> - Số điện thoại: </strong>@Model.DienThoai</p>
+                <p><strong style="color:blue"> - Email: </strong>@Model.Email</p>
+            </div>
+        </div>
+    </div>
+</div>
+

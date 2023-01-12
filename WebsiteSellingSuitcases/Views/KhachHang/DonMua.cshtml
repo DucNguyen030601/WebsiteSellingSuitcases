@@ -1,0 +1,40 @@
+﻿@model List<WebsiteSellingSuitcases.Models.tHoaDon>
+@using System.Threading;
+@using System.Globalization;
+<div class="coron_table table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th style="text-align:center">Số Hoá Đơn</th>
+                <th style="text-align:center ">Ngày Mua</th>
+                <th style="text-align:center ">Ngày Thanh Toán</th>
+                <th style="text-align: center">Tình Trạng</th>
+                <th style="text-align:center">Tổng Tiền</th>
+                <th style="text-align:center">Xem</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.SoHD</td>
+                        @{
+                            Thread.CurrentThread.CurrentCulture = new CultureInfo("vi-VN");
+                            string NgayTT = ((DateTime)item.NgayThanhToan).ToString("dddd dd/MM/yyy HH':'mm':'ss");
+                            string NgayMua = ((DateTime)item.NgayBan_NgayNhap).ToString("dddd dd/MM/yyy HH':'mm':'ss");
+                        }
+                        <td style="color:deeppink">@NgayMua</td>
+                        <td style="color:deeppink">@NgayTT</td>
+                        <td><span class="success" style="color:blue">@item.NoiDung</span></td>
+                        <td style="color:orangered">@String.Format("{0:0,0 VNĐ}", item.TongTien)</td>
+                        <td><a data-toggle="modal-ajax" data-target="#modalDetailsBill" data-url="@Url.Action("ChiTietHoaDon", "KhachHang", new {SoHD = item.SoHD })" title="Quick view">Xem chi tiết</a></td>
+                    </tr>
+                }
+            }
+
+
+        </tbody>
+    </table>
+</div>
+

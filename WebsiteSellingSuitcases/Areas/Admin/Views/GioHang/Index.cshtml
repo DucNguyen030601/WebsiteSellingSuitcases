@@ -1,0 +1,68 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@model List<WebsiteSellingSuitcases.Models.GioHang>
+@using WebsiteSellingSuitcases.Models
+@{
+    WebsiteSellingSuitcasesEntities db = new WebsiteSellingSuitcasesEntities();
+    int getTotalProduct(string MaSP)
+    {
+        return (int)db.tDanhMucSPs.SingleOrDefault(n => n.MaSP == MaSP).SoLuong;
+    }
+}
+<h2>Giỏ Hàng</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Xoá</th>
+            <th width="150px">Ảnh</th>
+            <th>Sản Phẩm</th>
+            <th>Tình trạng</th>
+            <th>Giá</th>
+            <th>Số Lượng</th>
+            <th>Thành Tiền</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (var item in Model)
+            {
+
+                <tr>
+                    @using (Html.BeginForm("XoaGioHang", "GioHang", new { sMaSP = item.sMaSP, strUrl = Request.Url.ToString() }))
+                    {
+                        <td>
+                            <button style="background-color:white;color:blue;border:0px" type="submit"><i class="fas fa-trash" style="font-size:25px"></i></button>
+                        </td>
+                    }
+                    <td><img width="50%" src="~/Images/@item.sHinhAnh" alt=""></td>
+                    <td><a href="@Url.Action("Details","SanPham",new {MaSP=item.sMaSP })">@item.sTenSP</a></td>
+                    <td><a style="color:red">Còn @getTotalProduct(item.sMaSP) sản phẩm</a></td>
+                    <td>@String.Format("{0:0,0 VNĐ}", item.dDonGiaNhap)</td>
+
+                    @using (Html.BeginForm("CapNhapGioHang", "GioHang", new { sMaSP = item.sMaSP, strUrl = Request.Url.ToString() }))
+                    {
+                        <td><input min="0" max="100" value="@item.iSoLuong" type="number" name="txtSoLuong"></td>
+                        <td>@String.Format("{0:0,0 VNĐ}", item.dThanhTienNhap)</td>
+                        <td>
+                            <button class="btn btn-danger" type="submit">Cập nhật</button>
+                        </td>
+                    }
+                </tr>
+            }
+        }
+
+    </tbody>
+</table>
+<h5>Tổng số lượng: @ViewBag.TongSL</h5>
+<h5>Tông tiền: @String.Format("{0:0,0 VNĐ}", ViewBag.TongTien)</h5>
+@if (Model.Count() != 0)
+{
+    using (Html.BeginForm("DatHang", "GioHang"))
+    {
+        <button type="submit" class="btn btn-success"  style="clear:right" onclick="return confirm('Bạn có muốn nhập hàng không?')">Đặt Hàng</button>
+    }
+}

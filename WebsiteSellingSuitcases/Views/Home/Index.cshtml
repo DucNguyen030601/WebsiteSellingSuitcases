@@ -1,0 +1,352 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_LayoutSP.cshtml";
+}
+@using WebsiteSellingSuitcases.Models
+@using WebsiteSellingSuitcases.Common
+<div class=" pos_home_section">
+    <div class="row pos_home">
+        <div class="col-lg-3 col-md-8 col-12">
+            <!--sidebar banner-->
+            <div class="sidebar_widget banner mb-35">
+                <div class="banner_img mb-35">
+                    <a href="#"><img src="~/assets/img/banner/banner5.jpg" alt=""></a>
+                </div>
+                <div class="banner_img">
+                    <a href="#"><img src="~/assets/img/banner/banner6.jpg" alt=""></a>
+                </div>
+            </div>
+            <!--sidebar banner end-->
+            <!--categorie menu start-->
+            <div class="sidebar_widget catrgorie mb-35">
+                <h3>Thể loại</h3>
+                <ul>
+                    @Html.Action("SidebarCategories", "LoaiSP");
+
+
+                </ul>
+            </div>
+            <!--categorie menu end-->
+            <!--wishlist block start-->
+            @{
+                if (Session[Sessions.SESSION_CUSTOMMER] != null)
+                {
+                    @Html.Action("DanhSachYeuThich", "Home");
+                }
+            }
+
+            <!--wishlist block end-->
+            <!--popular tags area-->
+            <div class="sidebar_widget tags mb-35">
+                <div class="block_title">
+                    <h3>Thẻ phổ biến</h3>
+                </div>
+                <div class="block_tags">
+                    @Html.Action("PopularTags", "LoaiSP")
+                </div>
+            </div>
+            <!--popular tags end-->
+            <!--newsletter block start-->
+            <div class="sidebar_widget newsletter mb-35">
+                <div class="block_title">
+                    <h3>Bản Tin</h3>
+                </div>
+                <form action="#">
+                    <p>Đăng ký nhận bản tin của bạn</p>
+                    <input placeholder="Your email address" type="text">
+                    <button type="submit">Đăng Ký</button>
+                </form>
+            </div>
+            <!--newsletter block end-->
+            <!--special product start-->
+
+            @Html.Action("PopularProducts", "LoaiSP")
+
+            <!--special product end-->
+
+            <!--sidebar banner-->
+            <div class="sidebar_widget bottom ">
+                <div class="banner_img">
+                    <a href="#"><img src="~/assets/img/banner/banner9.jpg" alt=""></a>
+                </div>
+            </div>
+            <!--sidebar banner end-->
+
+
+
+        </div>
+        <div class="col-lg-9 col-md-12">
+            <!--banner slider start-->
+            <div class="banner_slider slider_1">
+                <div class="slider_active owl-carousel">
+                    <div class="single_slider" style="background-image: url(/assets/img/slider/slide_1.png)">
+                        <div class="slider_content">
+                            <div class="slider_content_inner">
+                                <h1>Vali chính hãng</h1>
+                                <p>Ở đây bán vali ngon hơn người yêu cũ.</p>
+                                <a href="#">Mua Sắm Ngay Bây Giờ</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="single_slider" style="background-image: url(/assets/img/slider/slider_2.png)">
+                        <div class="slider_content">
+                            <div class="slider_content_inner">
+                                <h1>Túi xách chính hãng</h1>
+                                <p>Ở đây bán túi xách ngon hơn người yêu cũ.</p>
+                                <a href="#">Mua Sắm Ngay Bây Giờ</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="single_slider" style="background-image: url(/assets/img/slider/slider_3.png)">
+                        <div class="slider_content">
+                            <div class="slider_content_inner">
+                                <h1>Ba lô chính hãng</h1>
+                                <p>Ở đây bán ba lô ngon hơn người yêu cũ.</p>
+                                <a href="#">Mua Sắm Ngay Bây Giờ</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--banner slider start-->
+            <!--new product area start-->
+            <div class="new_product_area">
+                <div class="block_title">
+                    <h3>SẢN PHẨM MỚI</h3>
+                </div>
+                <div class="row">
+                    <div class="product_active owl-carousel">
+                        @{
+                            WebsiteSellingSuitcasesEntities db = new WebsiteSellingSuitcasesEntities();
+                            var NEW_PRODUCTS = db.tDanhMucSPs.OrderByDescending(n => n.NgayTao).Take(11).ToArray();
+                            for (int item = 0; item < NEW_PRODUCTS.Length; item++)
+                            {
+                                <div class="col-lg-3">
+                                    <div class="single_product">
+                                        <div class="product_thumb">
+                                            <a href="@Url.Action("Details","SanPham",new {MaSP = NEW_PRODUCTS[item].MaSP})"><img src="~/Images/@NEW_PRODUCTS[item].Anh" alt=""></a>
+                                            <div class="img_icone">
+                                                @{
+                                                    if (NEW_PRODUCTS[item].LuotXem > 10)
+                                                    {
+                                                        <img src="~/assets/img/cart/span-hot.png" alt="">
+                                                    }
+                                                    else if (((TimeSpan)DateTime.Now.Subtract((DateTime)NEW_PRODUCTS[item].NgayTao)).TotalDays < 30)
+                                                    {
+                                                        <img src="~/assets/img/cart/span-new.png" alt="">
+                                                    }
+                                                }
+                                            </div>
+                                            <div class="product_action">
+                                                @using (Html.BeginForm("ThemGioHang", "GioHang", new { sMaSP = NEW_PRODUCTS[item].MaSP, strUrl = Request.Url.ToString(), SoLuong = 1 }))
+                                                {
+                                                    <button type="submit" class="btn btn-info" style="color:white;width:100%"> <i class="fa fa-shopping-cart"></i> Thêm giỏ hàng</button>
+                                                }
+
+                                            </div>
+                                        </div>
+                                        <div class="product_content">
+                                            @{
+                                                double discountNEW_PRODUCTS = (double)(NEW_PRODUCTS[item].GiaBan - NEW_PRODUCTS[item].GiaBan * NEW_PRODUCTS[item].ChietKhau);
+                                            }
+                                            <span class="product_price">@String.Format("{0:0,0 VNĐ}", discountNEW_PRODUCTS)</span>
+                                            <h3 class="product_title"><a href="single-product.html">@NEW_PRODUCTS[item].TenSP</a></h3>
+                                        </div>
+                                        <div class="product_info">
+                                            <ul>
+                                                <li>
+                                                    @using (Html.BeginForm("ThemYeuThich", "KhachHang", new { sMaSP = NEW_PRODUCTS[item].MaSP, strUrl = Request.Url.ToString()}))
+                                                    {
+
+                                                        <button type="submit" style="border:0px;background-color:white;"> <a>Thêm lượt thích</a></button>
+
+                                                    }
+                                                </li>
+
+
+                                                    <li><a  data-toggle="modal-ajax" data-target="#modalDetails" data-url="@Url.Action("DetailsPartial", "SanPham", new {MaSP = NEW_PRODUCTS[item].MaSP})" title="Quick view" >Xem chi tiết</a></li>
+                                                </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+            <!--new product area start-->
+            <!--featured product start-->
+            <div class="featured_product">
+                <div class="block_title">
+                    <h3>SẢN PHẨM BÁN CHẠY</h3>
+                </div>
+                <div class="row">
+                    <div class="product_active owl-carousel">
+                        @{
+                            var noRepeat = (from p in db.tHoaDons
+                                            from q in db.tChiTietHoaDons
+                                            where p.SoHD == q.SoHD && p.Loai == false && p.NgayThanhToan != null
+                                            select q).GroupBy(n => n.MaSP).Select(group => new { MaSP = group.Key, SoLuong = group.Sum(n=>n.SoLuong) }).OrderByDescending(n=>n.SoLuong).Take(10).ToList();
+                            var products = db.tDanhMucSPs.ToList();
+                            var FEATURED_PRODUCTS = (from p in products
+                                                     from q in noRepeat
+                                                     where p.MaSP == q.MaSP
+                                                     select p).ToArray();
+                            for (int item = 0; item < FEATURED_PRODUCTS.Length; item++)
+                            {
+                                <div class="col-lg-3">
+                                    <div class="single_product">
+                                        <div class="product_thumb">
+                                            <a href="@Url.Action("Details","SanPham",new {MaSP = FEATURED_PRODUCTS[item].MaSP})"><img src="~/Images/@FEATURED_PRODUCTS[item].Anh" alt=""></a>
+                                            <div class="img_icone">
+                                                @{
+                                                    if (FEATURED_PRODUCTS[item].LuotXem > 10)
+                                                    {
+                                                        <img src="~/assets/img/cart/span-hot.png" alt="">
+                                                    }
+                                                    else if (((TimeSpan)DateTime.Now.Subtract((DateTime)FEATURED_PRODUCTS[item].NgayTao)).TotalDays < 30)
+                                                    {
+                                                        <img src="~/assets/img/cart/span-new.png" alt="">
+                                                    }
+
+                                                }
+                                            </div>
+                                            <div class="product_action">
+                                                @using (Html.BeginForm("ThemGioHang", "GioHang", new { sMaSP = FEATURED_PRODUCTS[item].MaSP, strUrl = Request.Url.ToString(), SoLuong = 1 }))
+                                                {
+                                                    <button type="submit" class="btn btn-info" style="color:white;width:100%"> <i class="fa fa-shopping-cart"></i> Thêm giỏ hàng</button>
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="product_content">
+                                            @{
+                                double discountFEATURED_PRODUCTS = (double)(FEATURED_PRODUCTS[item].GiaBan - FEATURED_PRODUCTS[item].GiaBan * FEATURED_PRODUCTS[item].ChietKhau);
+                            }
+                                            <span class="product_price">@String.Format("{0:0,0 VNĐ}", discountFEATURED_PRODUCTS)</span>
+                                            <h3 class="product_title"><a href="single-product.html">@FEATURED_PRODUCTS[item].TenSP</a></h3>
+                                        </div>
+                                        <div class="product_info">
+                                            <ul>
+                                                <li>
+                                                    @using (Html.BeginForm("ThemYeuThich", "KhachHang", new { sMaSP = FEATURED_PRODUCTS[item].MaSP, strUrl = Request.Url.ToString() }))
+                                                    {
+
+                                                        <button type="submit" style="border:0px;background-color:white;"> <a>Thêm lượt thích</a></button>
+
+                                                    }
+                                                </li>
+                                                <li><a data-toggle="modal-ajax" data-target="#modalDetails" data-url="@Url.Action("DetailsPartial", "SanPham", new {MaSP = FEATURED_PRODUCTS[item].MaSP })" title="Quick view">Xem chi tiết</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+
+                    </div>
+                </div>
+            </div>
+            <!--featured product end-->
+            <!--banner area start-->
+            <div class="banner_area mb-60">
+                <div class="block_title">
+                    <h3>SALE</h3>
+                </div>
+                <div class="row">
+                    <div class="product_active owl-carousel">
+                        @{
+                            var maxDiscount = db.tDanhMucSPs.GroupBy(n => n.ChietKhau).Select(group => group.Key).OrderByDescending(n => n.Value).Take(2).ToList();
+                            var SALE_PRODUCTS = (from p in products
+                                                 from q in maxDiscount
+                                                 where p.ChietKhau == q.Value
+                                                 select p).OrderByDescending(n => n.ChietKhau).Take(10).ToList();
+                            foreach (var item in SALE_PRODUCTS)
+                            {
+                                
+                                <div class="col-lg-3">
+                                    <div class="single_banner">
+                                        <a href="@Url.Action("Details","SanPham",new {MaSP = item.MaSP})"><img src="~/Images/@item.Anh" alt=""></a>
+                                       
+                                            @if (item.ChietKhau == maxDiscount[0])
+                                            { 
+                                                <div class="banner_title">
+                                                    <p>Giảm tới <span> @(item.ChietKhau*100)%</span> </p>
+                                                </div>
+                                            }
+                                            else
+                                            { 
+                                                <div class="banner_title title_2">
+                                                    <p>Giảm giá <span> @(item.ChietKhau*100)%</span> </p>
+                                                </div>
+                                            }
+                                         <div class="product_content">
+                                            @{
+                                                double discountFEATURED_PRODUCTS = (double)(item.GiaBan - item.GiaBan * item.ChietKhau);
+                                            }
+                                            <span class="product_price">@String.Format("{0:0,0 VNĐ}", discountFEATURED_PRODUCTS)</span>
+                                            <h3 class="product_title"><a href="single-product.html">@item.TenSP</a></h3>
+                                        </div>
+                        
+                                        
+                                    </div>
+                                </div>
+                            }
+                        }
+
+
+                    </div>
+                    </div>
+                </div>
+            <!--banner area end-->
+            <!--brand logo strat-->
+            <div class="brand_logo mb-60">
+                <div class="block_title">
+                    <h3>Brands</h3>
+                </div>
+                <div class="row">
+                    <div class="brand_active owl-carousel">
+                        <div class="col-lg-2">
+                            <div class="single_brand">
+                                <a href="#"><img src="~/assets/img/brand/brand1.jpg" alt=""></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="single_brand">
+                                <a href="#"><img src="~/assets/img/brand/brand2.jpg" alt=""></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="single_brand">
+                                <a href="#"><img src="~/assets/img/brand/brand3.jpg" alt=""></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="single_brand">
+                                <a href="#"><img src="~/assets/img/brand/brand4.jpg" alt=""></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="single_brand">
+                                <a href="#"><img src="~/assets/img/brand/brand5.jpg" alt=""></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="single_brand">
+                                <a href="#"><img src="~/assets/img/brand/brand6.jpg" alt=""></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--brand logo end-->
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script>
+    $(document).ready(function () {
+        if ("@TempData["XinChao"]" != "") {
+            alert(@Html.Raw(Json.Encode(TempData["XinChao"])));
+        }
+    })
+</script>

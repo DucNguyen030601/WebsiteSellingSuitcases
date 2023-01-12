@@ -1,0 +1,83 @@
+﻿@model WebsiteSellingSuitcases.Models.tBlog
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tBlog</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TieuDe)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TieuDe)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TomTat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TomTat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ChiTiet)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChiTiet)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AnhBlog)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AnhBlog)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ngay)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ngay)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LuotXem)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LuotXem)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tLoaiBlog.Ten)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tLoaiBlog.Ten)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tNhanVien.TenNguoiDung)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tNhanVien.TenNguoiDung)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Blog_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

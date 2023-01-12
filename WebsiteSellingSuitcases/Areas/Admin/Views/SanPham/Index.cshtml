@@ -1,0 +1,148 @@
+﻿@model PagedList<WebsiteSellingSuitcases.Models.tDanhMucSP>
+@using PagedList.Mvc
+@using PagedList
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Danh Mục Sản Phẩm</h2>
+
+<div style="float:right">
+    @using (Html.BeginForm("Index", "SanPham", FormMethod.Get))
+    {
+        @Html.TextBox("TimKiem", null, htmlAttributes: new { @placeholder = "Tìm kiếm tên sản phẩm..", @class = "search_input" })
+        <button type="submit"><i class="fa fa-search"></i></button>
+    }
+</div>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Tên sản phẩm
+        </th>
+        <th>
+            Màu sắc
+        </th>
+
+        <th>
+            Bảo hành
+        </th>
+
+        <th>
+            Giá bán
+        </th>
+        <th>
+            Chiết khấu
+        </th>
+        <th>
+            Ảnh
+        </th>
+        <th>
+            @* @Html.DisplayNameFor(model => model.SoLuong)*@Số lượng
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.NgayTao)*@Ngày tạo
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.GiaNhap)*@Giá nhập
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.LuotXem)*@Lượt xem
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.tChatLieu.ChatLieu)*@Chất liệu
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.tHangSX.HangSX)*@Hãng sản xuất
+        </th>
+
+        <th>
+            @*@Html.DisplayNameFor(model => model.tLoaiDT.TenLoai)*@Thể loại
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.tLoaiSP.Loai)*@Loại
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.tQuocGia.TenNuoc)*@Nước
+        </th>
+        <th>
+            Tất cả ảnh
+        </th>
+        <th>
+            Nhập Hàng
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenSP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MauSac)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.ThoiGianBaoHanh)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.GiaBan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChietKhau)
+            </td>
+            <td>
+                <img src="~/Images/@item.Anh" width="50px" height="50px" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoLuong)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayTao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GiaNhap)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LuotXem)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tChatLieu.ChatLieu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tHangSX.HangSX)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tLoaiDT.TenLoai)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tLoaiSP.Loai)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tQuocGia.TenNuoc)
+            </td>
+            <td>
+                <a href="@Url.Action("Index", "AnhSanPham", new {MaSP = item.MaSP.Trim()})">Xem</a>
+            </td>
+            <td>
+                @using (Html.BeginForm("ThemGioHang", "GioHang", new { sMaSP = item.MaSP, strUrl = Request.Url.ToString(), SoLuong = 1 }))
+                {
+                    <button type="submit" class="btn btn-info" style="color:white;width:100%"> <i class="fa fa-shopping-cart"></i> Thêm</button>
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { MaSP = item.MaSP }) |
+                @Html.ActionLink("Details", "Details", new { MaSP = item.MaSP }) |
+                @Html.ActionLink("Delete", "Delete", new { MaSP = item.MaSP })
+            </td>
+        </tr>
+    }
+
+</table>
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))

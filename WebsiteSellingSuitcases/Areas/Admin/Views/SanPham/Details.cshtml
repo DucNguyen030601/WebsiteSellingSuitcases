@@ -1,0 +1,187 @@
+﻿@model WebsiteSellingSuitcases.Models.tDanhMucSP
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tDanhMucSP</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenSP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenSP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NganLapTop)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NganLapTop)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MauSac)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MauSac)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CanNang)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CanNang)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DoNoi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DoNoi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Website)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Website)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ThoiGianBaoHanh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ThoiGianBaoHanh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GioiThieuSP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GioiThieuSP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GiaBan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GiaBan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ChietKhau)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChietKhau)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Anh)
+        </dt>
+
+        <dd>
+            <img src="~/Images/@Model.Anh" id="imgInput" style="width:400px;height:400px;object-fit:contain" />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoLuong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoLuong)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayTao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayTao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GiaNhap)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GiaNhap)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LuotXem)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LuotXem)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tChatLieu.ChatLieu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tChatLieu.ChatLieu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tHangSX.HangSX)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tHangSX.HangSX)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tKichThuoc.KichThuoc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tKichThuoc.KichThuoc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tLoaiDT.TenLoai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tLoaiDT.TenLoai)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tLoaiSP.Loai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tLoaiSP.Loai)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tQuocGia.TenNuoc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tQuocGia.TenNuoc)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MaSP }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

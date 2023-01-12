@@ -1,0 +1,49 @@
+﻿@model List<WebsiteSellingSuitcases.Models.tLoaiSP>
+
+<div class="main_menu_inner">
+    <div class="main_menu d-none d-lg-block">
+        <nav>
+            <ul>
+                <li id="navTrangChu">
+                    <a href="/Home">Trang chủ</a>
+                </li>
+                @{ foreach (var item in Model)
+                                {
+                    <li id="@Url.Content("nav"+item.MaLoai.Trim())">
+                        <a href="@Url.Action("Index","SanPham",new {@MaLoai = item.MaLoai.Trim() })" >@item.Loai</a>
+                    </li> } }
+
+                <li id="navBlog">
+                    <a href="@Url.Action("Index","Blog")">blog</a>
+                </li>
+                <li id="navLienHe"><a href="/LienHe">Liên hệ chúng tôi</a></li>
+
+
+            </ul>
+        </nav>
+    </div>
+
+
+    <div class="mobile-menu d-lg-none">
+        <nav>
+            <ul>
+                <li class="active">
+                    <a href="/Home">Trang chủ</a>
+                </li>
+                @{ 
+                    foreach (var item in Model)
+                    {
+                    <li>
+                        <a href="@Url.Action("Index","SanPham",new {@MaLoai = item.MaLoai.Trim() })">@item.Loai</a>
+                    </li> 
+                    } 
+                  }
+
+                <li>
+                    <a href="/Blog">blog</a>
+                </li>               
+                <li ><a href="/LienHe">Liên hệ chúng tôi</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>

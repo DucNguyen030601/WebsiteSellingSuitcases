@@ -1,0 +1,43 @@
+﻿@model List<WebsiteSellingSuitcases.Models.tDanhMucSP>
+@using WebsiteSellingSuitcases.Models;
+
+<div class="sidebar_widget special">
+    <div class="block_title">
+        <h3>Sản Phẩm Nổi Bật</h3>
+    </div>
+    @{
+        foreach (var item in Model)
+        {
+            <div class="special_product_inner mb-20">
+                <div class="special_p_thumb">
+                    <a href="@Url.Action("Details","SanPham",new {MaSP = item.MaSP.Trim()})"><img src="~/Images/@item.Anh" alt="" width="60px"></a>
+                </div>
+                <div class="small_p_desc">
+                    <div class="product_ratting">
+                        <ul>
+                            <li><a href="#"><i class="fa fa-star"></i></a></li>
+                            <li><a href="#"><i class="fa fa-star"></i></a></li>
+                            <li><a href="#"><i class="fa fa-star"></i></a></li>
+                            <li><a href="#"><i class="fa fa-star"></i></a></li>
+                            <li><a href="#"><i class="fa fa-star"></i></a></li>
+                        </ul>
+                    </div>
+                    <h3><a href="single-product.html">@item.TenSP</a></h3>
+                    <div class="special_product_proce">
+                        @{
+
+                            double discount = (double)(item.GiaBan - item.GiaBan * item.ChietKhau);
+                            double price = (double)(item.GiaBan);
+
+                        }
+                        <span class="old_price">@String.Format("{0:0,0 VNĐ}", price)</span>
+                        <span class="new_price">@String.Format("{0:0,0 VNĐ}", discount)</span>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+
+   
+
+</div>

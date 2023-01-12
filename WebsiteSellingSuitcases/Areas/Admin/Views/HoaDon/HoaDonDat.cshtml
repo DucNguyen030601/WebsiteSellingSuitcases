@@ -1,0 +1,74 @@
+﻿@model PagedList<WebsiteSellingSuitcases.Models.tHoaDon>
+@using PagedList.Mvc
+@using PagedList
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2> Hoá Đơn Khách Hàng Đặt</h2>
+<div style="float:right">
+    @using (Html.BeginForm("HoaDonDat", "HoaDon", FormMethod.Get))
+    {
+        @Html.TextBox("TimKiem", null, htmlAttributes: new { @placeholder = "Tìm kiếm tên khách hàng..", @class = "search_input" })
+        <button type="submit"><i class="fa fa-search"></i></button>
+    }
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Số Hoá Đơn</th>
+            <th>Tên Khách Hàng</th>
+            <th>Ngày Đặt</th>
+            <th>Tổng Tiền</th>
+            <th>Chi Tiết Đơn Hàng</th>
+            <th>Lập Hoá Đơn</th>
+            <th>Tình trạng</th>
+            <th style="text-align:center">Cập nhật</th>
+            <th style="text-align:center">Nhận hàng/Thanh toán</th>
+            <th>Trả hàng</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.SoHD</td>
+                    <td><a style="text-decoration:underline" data-toggle="modal-ajax" data-target="#modalDetailsCustomer" data-url="@Url.Action("ChiTietKhachHang", "KhachHang", new {MaKH = item.MaKH })" title="Quick view">@item.tKhachHang.TenKH</a></td>
+                    <td>@item.NgayBan_NgayNhap</td>
+                    <td>@String.Format("{0:0,0 VNĐ}", @item.TongTien)</td>
+                    <td><a style="text-decoration:underline" data-toggle="modal-ajax" data-target="#modalDetailsBill" data-url="@Url.Action("ChiTietHoaDon", "HoaDon", new {SoHD = item.SoHD })" title="Quick view">Xem chi tiết</a></td>
+                    <td><a style="text-decoration:underline" data-toggle="modal-ajax" data-target="#modalDetailsAdmin" data-url="@Url.Action("ChiTietNhanVien", "NhanVien", new {MaNV = item.MaNV })" title="Quick view">@item.tNhanVien.TenNV</a></td>
+                    @using (Html.BeginForm("CapNhatHoaDon", "DuyetHoaDon", new { SoHD = item.SoHD, strUrl = Request.Url.ToString() }))
+                    {
+                        <td><textarea name="NoiDung" rows="4" cols="50">@item.NoiDung</textarea></td>
+                        <td style="text-align:center">
+                            <button style="background-color:white;border:0px"><i class="fas fa-sync fa-spin" style="color:darkslategrey;font-size:20px"></i></button>
+                        </td>
+                    }
+                    <td style="text-align:center">
+                        @using (Html.BeginForm("ThanhToanHoaDon", "DuyetHoaDon", new { SoHD = item.SoHD }))
+                        {
+                            <button class="btn-sm btn-primary"><i class='far fa-check-circle'></i> Duyệt</button>
+                        }
+                    </td>
+                    <td style="text-align:center">
+                        @using (Html.BeginForm("TraHang", "DuyetHoaDon", new { SoHD = item.SoHD }))
+                        {
+                            <button class="btn-sm btn-warning"><i class='far fa-check-circle'></i> Duyệt</button>
+                        }
+                    </td>
+
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+@Html.PagedListPager(Model, page => Url.Action("HoaDonDat", new { page = page }))
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script>
+    $(document).ready(function () {
+        if ("@TempData["thongtin"]" != "") alert(@Html.Raw(Json.Encode(TempData["thongtin"])))
+    })
+</script>

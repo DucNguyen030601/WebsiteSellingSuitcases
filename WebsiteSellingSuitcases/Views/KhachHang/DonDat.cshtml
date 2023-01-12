@@ -1,0 +1,58 @@
+﻿@model List<WebsiteSellingSuitcases.Models.tHoaDon>
+@using System.Threading;
+@using System.Globalization;
+<div class="coron_table table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th style="text-align:center">Số Hoá Đơn</th>
+                <th style="text-align:center ">Ngày Đặt</th>
+                <th style="text-align: center">Tình Trạng</th>
+                <th style="text-align:center">Tổng Tiền</th>
+                <th style="text-align:center">Xem</th>
+                <th style="text-align:center"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.SoHD</td>
+                        @{
+                            Thread.CurrentThread.CurrentCulture = new CultureInfo("vi-VN");
+                            string strToday = ((DateTime)item.NgayBan_NgayNhap).ToString("dddd dd/MM/yyy HH':'mm':'ss");
+                        }
+                        <td style="color:deeppink">@strToday</td>
+                        <td><span class="success" style="color:blue">@item.NoiDung</span></td>
+                        <td style="color:orangered">@String.Format("{0:0,0 VNĐ}", item.TongTien)</td>
+                        <td><a style="text-decoration:underline" data-toggle="modal-ajax" data-target="#modalDetailsBill" data-url="@Url.Action("ChiTietHoaDon", "KhachHang", new {SoHD = item.SoHD })" title="Quick view">Xem chi tiết</a></td>
+                        <td>
+                            @{
+                                if (item.XacNhan == 0)
+                                {
+                                    using (Html.BeginForm("HuyHoaDon", "KhachHang", new { SoHD = item.SoHD, strUrl = Request.Url.ToString() }))
+                                    {
+                                        <button type="submit" class="btn btn-outline-danger" onclick="return confirm('Bạn có chắc chắn muốn huỷ đơn hàng này không?')"><i class="fa fa-remove" style="font-size:20px"></i> Huỷ H.Đ</button>
+                                    }
+                                }
+                                else
+                                {
+                                    <button class="btn btn-outline-primary" onclick="alert('Mời bạn liên hệ đến số @item.tNhanVien.DienThoai để biết thêm thông tin đơn hàng!')"><i class="fa fa-phone" style="font-size:20px"></i> Liên hệ</button>
+                                }
+                            }
+                        </td>
+                    </tr>
+                }
+            }
+
+
+        </tbody>
+    </table>
+</div>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script>
+    $(document).ready(function () {
+        if ("@TempData["thongtin"]" != "") alert(@Html.Raw(Json.Encode(TempData["thongtin"])))
+    })
+</script>

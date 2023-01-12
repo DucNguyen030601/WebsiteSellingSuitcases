@@ -1,0 +1,35 @@
+﻿@model List<WebsiteSellingSuitcases.Models.tYeuThich>
+<div class="sidebar_widget wishlist mb-35">
+    <div class="block_title">
+        <h3><a href="#">Danh sách yêu thích</a></h3>
+    </div>
+    <div style="overflow:auto;height:200px">
+    @{ 
+        foreach (var item in Model)
+        {
+        <div class="cart_item">
+            <div class="cart_img">
+                <a href="#"><img src="~/Images/@item.tDanhMucSP.Anh" alt=""></a>
+            </div>
+            <div class="cart_info">
+                <a href="#">@item.tDanhMucSP.TenSP</a>
+            <span class="cart_price">@String.Format("{0:0,0 VNĐ}", item.tDanhMucSP.GiaBan*(1-item.tDanhMucSP.ChietKhau))</span>
+                <span class="quantity">Số lượng: @item.tDanhMucSP.SoLuong</span>
+            </div>
+            <div class="cart_remove">
+                @using (Html.BeginForm("XoaYeuThich", "KhachHang", new { sMaSP = item.MaSP, strUrl = Request.Url.ToString() }))
+                {
+                    <button type="submit" style="color: #00bba6; font-size: 20px;background-color:white;border:0px "><i class="fa fa-times-circle"></i></button>
+                }
+            </div>
+        </div>
+        }
+    }
+    
+  </div>
+    <div class="block_content">
+        <br />
+        <strong style="color:red">@Model.Count()  sản phẩm</strong>
+        <a href="@Url.Action("Index","KhachHang",new {ThongTin="YeuThich" })">» Danh sách yêu thích của tôi</a>
+    </div>
+</div>
